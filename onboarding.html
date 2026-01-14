@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Ditto</title>
+  <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+  <main class="onboarding">
+    
+    <!-- Header -->
+    <header class="header">
+      <img src="icons/icon128-dark.png" alt="Ditto" class="brand-icon">
+    </header>
+
+    <!-- Primary Instruction -->
+    <h1 class="instruction">Pin Ditto to your toolbar for one-click access</h1>
+
+    <!-- Ghost UI Animation Container -->
+    <div class="visual-guide">
+      
+      <!-- Simplified Browser Chrome -->
+      <div class="ghost-browser">
+        
+        <!-- Address Bar -->
+        <div class="address-bar">
+          <div class="address-controls">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="address-input">
+            <span class="url-text">youtube.com/watch?v=...</span>
+          </div>
+          <div class="extension-area">
+            <!-- Chrome puzzle icon (SVG) -->
+            <div class="puzzle-icon" aria-label="Extensions">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.5 11H19V7C19 5.9 18.1 5 17 5H13V3.5C13 2.12 11.88 1 10.5 1C9.12 1 8 2.12 8 3.5V5H4C2.9 5 2 5.9 2 7V10.8H3.5C5 10.8 6.2 12 6.2 13.5C6.2 15 5 16.2 3.5 16.2H2V20C2 21.1 2.9 22 4 22H7.8V20.5C7.8 19 9 17.8 10.5 17.8C12 17.8 13.2 19 13.2 20.5V22H17C18.1 22 19 21.1 19 20V16H20.5C21.88 16 23 14.88 23 13.5C23 12.12 21.88 11 20.5 11Z" fill="currentColor"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extension Dropdown (appears on click) -->
+        <div class="extension-dropdown">
+          <div class="dropdown-item ditto-item">
+            <img src="icons/icon32-dark.png" alt="" class="ext-icon-img">
+            <span class="ext-name">Ditto</span>
+            <!-- Pin/thumbtack icon (SVG) -->
+            <div class="pin-icon" aria-label="Pin extension">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 9V4H17C17.55 4 18 3.55 18 3C18 2.45 17.55 2 17 2H7C6.45 2 6 2.45 6 3C6 3.55 6.45 4 7 4H8V9C8 10.66 6.66 12 5 12V14H10.97V21L11.97 22L12.97 21V14H19V12C17.34 12 16 10.66 16 9Z" fill="currentColor"/>
+              </svg>
+            </div>
+          </div>
+          <div class="dropdown-item faded">
+            <!-- Lock icon (SVG) -->
+            <div class="ext-icon-svg">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17ZM15.1 8H8.9V6C8.9 4.29 10.29 2.9 12 2.9C13.71 2.9 15.1 4.29 15.1 6V8Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="ext-name">Other Extension</span>
+            <span class="pin-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Animated Cursor -->
+      <div class="cursor"></div>
+
+    </div>
+
+    <!-- CTA Button -->
+    <button class="cta-button" id="letsRip">
+      Done
+    </button>
+
+  </main>
+  <script src="onboarding.js"></script>
+</body>
+</html>

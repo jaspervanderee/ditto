@@ -73,8 +73,15 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 });
 
 // Initialize on install/update
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener((details) => {
   checkTheme();
+  
+  // Show onboarding page on first install only
+  if (details.reason === 'install') {
+    chrome.tabs.create({
+      url: chrome.runtime.getURL('onboarding.html')
+    });
+  }
 });
 
 // Initialize on service worker startup

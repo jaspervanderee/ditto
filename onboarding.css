@@ -1,0 +1,490 @@
+/* === Onboarding Styles === */
+/* Retrowave Aesthetic */
+
+:root {
+  --yellow: #ffff8a;
+  --dark-blue: #1b0159;
+  --black: #000000;
+  --white: #ffffff;
+}
+
+/* === Reset === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === Base === */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Layout === */
+.onboarding {
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+/* === Header === */
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-icon {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+
+/* === Instruction Text (above visual guide) === */
+.instruction {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--white);
+  text-align: center;
+  max-width: 320px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* === Visual Guide Container === */
+.visual-guide {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  height: 180px;
+  background: var(--black);
+  border: 1px solid rgba(255, 255, 138, 0.12);
+  border-radius: 12px;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+/* === Ghost Browser Chrome === */
+.ghost-browser {
+  position: relative;
+  width: 88%;
+}
+
+/* Address Bar */
+.address-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--dark-blue);
+  border-radius: 8px;
+  padding: 0 0.75rem;
+  height: 36px;
+}
+
+.address-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.address-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+  overflow: hidden;
+}
+
+.url-text {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  white-space: nowrap;
+}
+
+.extension-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+/* === Puzzle Icon (SVG) === */
+.puzzle-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: puzzle-react 5s ease-in-out infinite;
+}
+
+.puzzle-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* === Extension Dropdown === */
+.extension-dropdown {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  width: 190px;
+  background: var(--dark-blue);
+  border-radius: 8px;
+  padding: 0.375rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transform-origin: top right;
+  animation: dropdown-cycle 5s ease-in-out infinite;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.625rem;
+  font-size: 0.75rem;
+  color: var(--white);
+}
+
+.dropdown-item.faded {
+  opacity: 0.35;
+}
+
+/* Ditto brand icon in dropdown */
+.ext-icon-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+/* Other extension icons (SVG) */
+.ext-icon-svg {
+  width: 18px;
+  height: 18px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ext-icon-svg svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ext-name {
+  flex: 1;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* === Pin Icon (SVG) === */
+.pin-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pin-react 5s ease-in-out infinite;
+}
+
+.pin-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pin-placeholder {
+  width: 14px;
+  height: 14px;
+  color: var(--white);
+  opacity: 0.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pin-placeholder svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ditto-item {
+  position: relative;
+}
+
+/* Highlight ring around Ditto item */
+.ditto-item::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 2px solid var(--yellow);
+  border-radius: 6px;
+  pointer-events: none;
+  animation: highlight-cycle 5s ease-in-out infinite;
+}
+
+/* === Animated Cursor === */
+.cursor {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  z-index: 100;
+  
+  /* Cursor shape - pointer triangle, tip at top-left */
+  background: var(--yellow);
+  clip-path: polygon(0 0, 0 100%, 70% 70%);
+  
+  /* Starting position - bottom left of visual guide */
+  top: 120px;
+  left: 60px;
+  opacity: 0;
+  
+  /* Animation sequence */
+  animation: cursor-journey 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   All synced to 5s loop for perfect timing
+   ============================================ */
+
+/* Cursor Movement - precise coordinates */
+/* Layout: visual-guide 360x180, ghost-browser 88% (317px) centered */
+/* Cursor starts at left:60px top:120px, tip at element origin */
+@keyframes cursor-journey {
+  /* Fade in at starting position */
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  8% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  
+  /* Move to puzzle icon center */
+  /* Puzzle at X:312 Y:38 → translate(252px, -82px) */
+  28% {
+    opacity: 1;
+    transform: translate(252px, -82px);
+  }
+  
+  /* Click on puzzle - cursor stays, icon reacts */
+  32% {
+    opacity: 1;
+    transform: translate(252px, -82px);
+  }
+  
+  /* Move to pin icon in dropdown */
+  /* Pin at X:320 Y:81 → translate(260px, -39px) */
+  55% {
+    opacity: 1;
+    transform: translate(265px, -39px);
+  }
+  
+  /* Click on pin - cursor stays, icon reacts */
+  60% {
+    opacity: 1;
+    transform: translate(265px, -39px);
+  }
+  
+  /* Hold position */
+  82% {
+    opacity: 1;
+    transform: translate(265px, -39px);
+  }
+  
+  /* Fade out */
+  92%, 100% {
+    opacity: 0;
+    transform: translate(265px, -39px);
+  }
+}
+
+/* Puzzle Icon Reaction - click feedback when cursor arrives */
+@keyframes puzzle-react {
+  0%, 27% {
+    transform: scale(1);
+    opacity: 0.6;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  /* Glow as cursor approaches */
+  28% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--yellow));
+  }
+  /* CLICK - scale down */
+  30% {
+    transform: scale(0.85);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px var(--yellow));
+  }
+  /* Release */
+  33% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 6px var(--yellow));
+  }
+  /* Return to idle */
+  42%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+/* Dropdown Cycle - appears after puzzle click */
+@keyframes dropdown-cycle {
+  0%, 31% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+  38%, 84% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  92%, 100% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+}
+
+/* Highlight Ring Cycle */
+@keyframes highlight-cycle {
+  0%, 42% {
+    opacity: 0;
+  }
+  50%, 84% {
+    opacity: 1;
+  }
+  92%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Pin Icon Reaction - click feedback when cursor arrives */
+@keyframes pin-react {
+  0%, 38% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  /* Appear when dropdown opens */
+  46% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  /* Glow as cursor approaches */
+  54% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 6px var(--yellow));
+  }
+  /* CLICK - scale down */
+  57% {
+    transform: scale(0.8);
+    opacity: 1;
+    filter: drop-shadow(0 0 10px var(--yellow));
+  }
+  /* Pop back with emphasis */
+  62% {
+    transform: scale(1.15);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--yellow));
+  }
+  /* Settle */
+  68%, 84% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  92%, 100% {
+    transform: scale(0);
+    opacity: 0;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+/* === CTA Button === */
+.cta-button {
+  background: var(--yellow);
+  color: var(--black);
+  border: none;
+  padding: 0.875rem 2.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  will-change: transform;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 138, 0.3);
+}
+
+.cta-button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 12px rgba(255, 255, 138, 0.2);
+}
+
+/* === Responsive === */
+@media (max-width: 400px) {
+  .onboarding {
+    padding: 2rem 1.25rem;
+    gap: 1.5rem;
+  }
+  
+  .brand-icon {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .title {
+    font-size: 1.875rem;
+  }
+  
+  .instruction {
+    font-size: 1.125rem;
+  }
+  
+  .visual-guide {
+    max-width: 100%;
+    height: 160px;
+  }
+  
+  .extension-dropdown {
+    width: 160px;
+  }
+}

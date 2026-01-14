@@ -3,9 +3,11 @@
   color-scheme: light dark;
   
   /* Brand Colors */
-  --color-bitcoin: #F7931A; /* The standard */
-  --color-success: #27C485; /* A friendly, minty green */
-  --color-error: #FF5252;   /* Soft but clear red */
+  --color-primary: #ffff8a;   /* Yellow */
+  --color-secondary: #1b0159; /* Dark blue */
+  --color-dark: #000000;      /* Black */
+  --color-success: #27C485;   /* A friendly, minty green */
+  --color-error: #FF5252;     /* Soft but clear red */
   
   /* Neutrals */
   --color-text: light-dark(#1F2937, #F3F4F6);
@@ -62,10 +64,10 @@ body {
   overflow: visible; /* Allow glows/strokes to bleed slightly */
 }
 
-/* === Loading State (Bitcoin / Reliable) === */
+/* === Loading State === */
 .status.loading .icon-loading {
   display: block;
-  color: var(--color-bitcoin);
+  color: var(--color-primary);
 }
 
 .status.loading .message {
@@ -161,6 +163,7 @@ body {
 .status.error .message {
   color: var(--color-error);
   font-size: 0.8125rem; /* Slightly smaller for long error text */
+  text-align: center;
 }
 
 @keyframes shake {

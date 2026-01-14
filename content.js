@@ -169,7 +169,7 @@
 
       if (Date.now() - startTime > POLL_TIMEOUT) {
         clearInterval(interval);
-        resolve({ error: 'Transcript not found. Try opening it manually.' });
+        resolve({ error: 'No transcript found' });
       }
     }, POLL_INTERVAL);
   }
@@ -289,11 +289,11 @@
             }
           }
           
-          resolve({ error: 'Clicked transcript button but content not found' });
+          resolve({ error: 'No transcript found' });
         }, GENERIC_WAIT_AFTER_CLICK);
       } else {
         // No button found, no transcript visible
-        resolve({ error: 'No transcript found on this page' });
+        resolve({ error: 'No transcript found' });
       }
     });
   }

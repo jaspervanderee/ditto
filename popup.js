@@ -54,7 +54,14 @@ async function run() {
     }
 
   } catch (err) {
-    setStatus(err.message, 'error');
+    let msg = 'No transcript found';
+    
+    // Chrome system pages get a distinct message
+    if (err.message.includes('Cannot access') || err.message.includes('chrome://')) {
+      msg = "Can't run here";
+    }
+    
+    setStatus(msg, 'error');
   }
 }
 
