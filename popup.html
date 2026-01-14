@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transcript Extractor</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+    <div id="status" class="status loading">
+      <!-- Loading spinner -->
+      <div class="icon icon-loading">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10" stroke-opacity="0.2"/>
+          <path d="M12 2a10 10 0 0 1 10 10" class="spinner-arc"/>
+        </svg>
+      </div>
+      <!-- Success checkmark -->
+      <div class="icon icon-success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" class="check-circle"/>
+          <path d="M8 12l3 3 5-6" class="check-mark"/>
+        </svg>
+      </div>
+      <!-- Error X -->
+      <div class="icon icon-error">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10" class="error-circle"/>
+          <path d="M15 9l-6 6M9 9l6 6" class="error-x"/>
+        </svg>
+      </div>
+      <span class="message">Working</span>
+    </div>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+/* === System Color Scheme === */
+:root {
+  color-scheme: light dark;
+  
+  /* Brand Colors */
+  --color-bitcoin: #F7931A; /* The standard */
+  --color-success: #27C485; /* A friendly, minty green */
+  --color-error: #FF5252;   /* Soft but clear red */
+  
+  /* Neutrals */
+  --color-text: light-dark(#1F2937, #F3F4F6);
+  --color-bg: light-dark(#FFFFFF, #111827);
+  --color-subtle: light-dark(#F3F4F6, #1F2937);
+}
+
+/* === Reset === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-width: 200px; /* Slight bump for breathing room */
+  -webkit-font-smoothing: antialiased; /* Crisp text */
+}
+
+/* === Popup === */
+.popup {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === Status Container === */
+.status {
+  display: flex;
+  flex-direction: column; /* Stack icon and text */
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  transition: all 0.3s ease;
+}
+
+/* === Icons === */
+.icon {
+  width: 32px; /* Larger, more confident icons */
+  height: 32px;
+  display: none;
+  position: relative;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible; /* Allow glows/strokes to bleed slightly */
+}
+
+/* === Loading State (Bitcoin / Reliable) === */
+.status.loading .icon-loading {
+  display: block;
+  color: var(--color-bitcoin);
+}
+
+.status.loading .message {
+  color: var(--color-text); /* Keep text neutral to let icon shine */
+  opacity: 0.8;
+  font-weight: 500;
+  animation: pulse-text 2s ease-in-out infinite;
+}
+
+/* A "Breathing" spinner - feels alive, not just mechanical */
+.spinner-arc {
+  transform-origin: center;
+  animation: spin-breath 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  stroke-linecap: round; /* Friendly rounded ends */
+}
+
+@keyframes spin-breath {
+  0% {
+    transform: rotate(0deg);
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    transform: rotate(360deg);
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.5; }
+}
+
+/* === Success State (Friendly / Trustworthy) === */
+.status.success .icon-success {
+  display: block;
+  color: var(--color-success);
+  /* The "Pop" - bouncy and satisfying */
+  animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.status.success .message {
+  color: var(--color-text);
+  animation: fade-up 0.4s ease-out forwards;
+}
+
+.check-circle {
+  stroke-dasharray: 63;
+  stroke-dashoffset: 63;
+  animation: circle-draw 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.check-mark {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  /* Deliberate delay for "1-2" punch effect */
+  animation: check-draw 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Spring physics pop */
+@keyframes pop-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes circle-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* === Error State === */
+.status.error .icon-error {
+  display: block;
+  color: var(--color-error);
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.status.error .message {
+  color: var(--color-error);
+  font-size: 0.8125rem; /* Slightly smaller for long error text */
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
+  40%, 60% { transform: translate3d(3px, 0, 0); }
+}
