@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The privacy-first YouTube video transcript extractor. 100% local processing, zero data harvesting. Instantly rip text from YouTube, Circle, Teachable, and Kajabi.">
+  <meta name="keywords" content="YouTube transcript generator, video transcript generator, YouTube video transcript generator, YouTube transcript extractor, transcript generator, tube ripper, text extractor, transcript extractor, caption generator">
+  <meta name="author" content="Ditto">
+  <meta property="og:title" content="Ditto — YouTube Transcript Generator">
+  <meta property="og:description" content="The privacy-first YouTube video transcript extractor. 100% local. Zero data tax.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ditto — YouTube Transcript Generator">
+  <meta name="twitter:description" content="The privacy-first YouTube video transcript extractor. 100% local. Zero data tax.">
+  <link rel="icon" type="image/png" href="icons/icon32-bg.png">
+  <title>Ditto — YouTube Transcript Generator | Privacy-First Video Text Extractor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+  
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does local extraction work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When you click Ditto, it reads the video's existing caption track directly from the page DOM. This data is already loaded in your browser—Ditto simply extracts and formats it. Nothing leaves your device. No server requests. No API calls. Pure client-side processing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Ditto is MIT-licensed open-source software. There are no premium tiers, no paywalls, no \"free trials.\" The V4V model means you can optionally support development via Lightning, but the tool is fully functional without payment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What platforms are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ditto is built to identify transcript elements on most major platforms. While we optimize for giants like Udemy and Coursera, the tool's heuristic engine is designed to find \"hidden\" text on almost any platform with a native video player."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why should I trust this extension?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every line of code is public on GitHub. The extension requests only two permissions: activeTab (to read the current page when you click) and clipboardWrite (to copy the transcript). No background data collection. No analytics. Audit it yourself."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Scanline Overlay for Retrowave Effect -->
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="grid-floor"></div>
+      <div class="sun"></div>
+    </div>
+    
+    <div class="container hero-content">
+      <img src="images/ditto-transcript-logo-yellow.svg" alt="Ditto" class="hero-logo">
+      
+      <h1 class="hero-headline">YouTube Transcript Generator</h1>
+      <p class="hero-subline">The privacy-first YouTube video transcript extractor. 100% local. Zero data tax. Rip text instantly from YouTube, Circle, Teachable, and Kajabi.</p>
+      
+      <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="cta-primary">
+        <svg class="chrome-icon" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 2a10 10 0 0 1 8.66 5H12" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M3.34 7a10 10 0 0 1 8.66-5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M3.34 17A10 10 0 0 0 12 22" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        Add to Browser — It's Free
+      </a>
+      <span class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="badge-icon">
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+        </svg>
+        No Login Required
+      </span>
+
+      <!-- 3-Step Process Guide -->
+      <div class="process-steps">
+        <div class="step step-1">
+          <div class="step-content">
+            <span class="step-number">1:</span>
+            <span class="step-text">Download Ditto</span>
+          </div>
+          <!-- Hand-drawn curved arrow pointing up-right toward CTA -->
+          <img src="images/arrow.svg" alt="" class="step-arrow" aria-hidden="true">
+        </div>
+        
+        <div class="step step-2">
+          <div class="step-content">
+            <span class="step-number">2:</span>
+            <span class="step-text">Pin it to your extension bar</span>
+          </div>
+        </div>
+        
+        <div class="step step-3">
+          <div class="step-content">
+            <span class="step-number">3:</span>
+            <span class="step-text">Click the Ditto logo and you've just copied the transcript!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ghost UI Animation Demo -->
+      <div class="visual-guide">
+        <div class="ghost-browser">
+          <!-- Window Chrome -->
+          <div class="window-chrome">
+            <div class="traffic-lights">
+              <span class="light light-red"></span>
+              <span class="light light-yellow"></span>
+              <span class="light light-green"></span>
+            </div>
+            <div class="extension-area">
+              <div class="puzzle-icon" aria-label="Extensions">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M20.5 11H19V7C19 5.9 18.1 5 17 5H13V3.5C13 2.12 11.88 1 10.5 1C9.12 1 8 2.12 8 3.5V5H4C2.9 5 2 5.9 2 7V10.8H3.5C5 10.8 6.2 12 6.2 13.5C6.2 15 5 16.2 3.5 16.2H2V20C2 21.1 2.9 22 4 22H7.8V20.5C7.8 19 9 17.8 10.5 17.8C12 17.8 13.2 19 13.2 20.5V22H17C18.1 22 19 21.1 19 20V16H20.5C21.88 16 23 14.88 23 13.5C23 12.12 21.88 11 20.5 11Z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- YouTube Video Mockup -->
+          <div class="video-player">
+            <div class="video-area">
+              <div class="play-button">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-played"></div>
+              <div class="progress-scrubber"></div>
+            </div>
+          </div>
+
+          <!-- Extension Dropdown -->
+          <div class="extension-dropdown">
+            <div class="dropdown-item ditto-item">
+              <img src="icons/icon32-dark.png" alt="" class="ext-icon-img">
+              <span class="ext-name">Ditto</span>
+              <div class="pin-icon" aria-label="Pin extension">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M16 9V4H17C17.55 4 18 3.55 18 3C18 2.45 17.55 2 17 2H7C6.45 2 6 2.45 6 3C6 3.55 6.45 4 7 4H8V9C8 10.66 6.66 12 5 12V14H10.97V21L11.97 22L12.97 21V14H19V12C17.34 12 16 10.66 16 9Z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+            <div class="dropdown-item faded">
+              <div class="ext-icon-svg">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17ZM15.1 8H8.9V6C8.9 4.29 10.29 2.9 12 2.9C13.71 2.9 15.1 4.29 15.1 6V8Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="ext-name">Other Extension</span>
+              <span class="pin-placeholder">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Animated Cursor -->
+        <div class="cursor"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Comparison Section -->
+  <section class="comparison" id="comparison">
+    <div class="container">
+      <div class="comparison-table">
+        <div class="comparison-col ditto">
+          <h3 class="col-header">
+            <img src="images/ditto-transcript-logo-yellow.svg" alt="Ditto" class="col-logo-img">
+          </h3>
+          <ul class="col-list">
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="" class="item-icon">
+              Your data stays yours.
+            </li>
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="" class="item-icon">
+              100% local, No servers.
+            </li>
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="" class="item-icon">
+              No signup.
+            </li>
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="" class="item-icon">
+              Open source.
+            </li>
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="" class="item-icon">
+              Unlimited free use.
+            </li>
+          </ul>
+        </div>
+        
+        <div class="comparison-divider">
+          <div class="divider-line"></div>
+          <span class="divider-vs">vs</span>
+          <div class="divider-line"></div>
+        </div>
+        
+        <div class="comparison-col cloud">
+          <h3 class="col-header">
+            <img src="images/cloud.svg" alt="" class="col-icon-img">
+            <span class="col-title">Cloud Converters</span>
+          </h3>
+          <ul class="col-list">
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="" class="item-icon">
+              Harvests your data.
+            </li>
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="" class="item-icon">
+              Server-side processing.
+            </li>
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="" class="item-icon">
+              Account required.
+            </li>
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="" class="item-icon">
+              Closed source.
+            </li>
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="" class="item-icon">
+              Paywall.
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="cta-primary cta-comparison">
+        <svg class="chrome-icon" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+        </svg>
+        Add to Browser — It's Free
+      </a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-headline">Built for the Sovereign Web</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-youtube">
+            <img src="images/youtube-transcript-generator-logo.svg" alt="" class="feature-icon-img">
+          </div>
+          <h3 class="feature-title">YouTube Transcript Extractor</h3>
+          <p class="feature-desc">Universal discovery for course platforms. Extract transcripts from YouTube, Circle, Teachable, Kajabi, and any site with embedded video players.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-udemy">
+            <img src="images/udemy-transcript-generator-logo.svg" alt="" class="feature-icon-img">
+          </div>
+          <h3 class="feature-title">Tube Ripper</h3>
+          <p class="feature-desc">1-click clipboard ripping. No fumbling with settings—just click Ditto and the full transcript lands in your clipboard. Paste anywhere.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-coursera">
+            <img src="images/coursera-transcript-generator-logo.svg" alt="" class="feature-icon-img">
+          </div>
+          <h3 class="feature-title">Video Text Extractor</h3>
+          <p class="feature-desc">Minimal permissions required. Only activeTab and clipboardWrite. No access to history, bookmarks, or browsing data. Audit the source yourself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compatibility Banner -->
+  <section class="compatibility" id="compatibility">
+    <div class="container">
+      <span class="compatibility-label">UNIVERSAL TRANSCRIPT DISCOVERY</span>
+      <div class="compatibility-logos">
+        <div class="logo-track">
+          <img src="images/youtube-logo.svg" alt="YouTube" class="compat-logo">
+          <img src="images/coursera-logo.svg" alt="Coursera transcript generator logo" class="compat-logo">
+          <img src="images/udemy-logo.svg" alt="Udemy transcript generator logo" class="compat-logo">
+          <img src="images/teachable-transcript-generator-logo.svg" alt="Teachable transcript generator logo" class="compat-logo">
+          <img src="images/kajabi-transcript-generator-logo.svg" alt="Kajabi transcript generator logo" class="compat-logo">
+          <img src="images/circle-transcript-generator-logo.svg" alt="Circle.so" class="compat-logo">
+          <!-- Duplicate for infinite scroll -->
+          <img src="images/youtube-logo.svg" alt="YouTube" class="compat-logo compat-logo-dup" aria-hidden="true">
+          <img src="images/coursera-logo.svg" alt="Coursera transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
+          <img src="images/udemy-logo.svg" alt="Udemy transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
+          <img src="images/teachable-transcript-generator-logo.svg" alt="Teachable transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
+          <img src="images/kajabi-transcript-generator-logo.svg" alt="Kajabi transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
+          <img src="images/circle-transcript-generator-logo.svg" alt="Circle transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
+        </div>
+      </div>
+      <p class="compatibility-tagline">Rips text from 100+ platforms including gated courses and private communities.</p>
+    </div>
+  </section>
+
+  <!-- Social Proof Section -->
+  <section class="social-proof" id="trust">
+    <div class="container">
+      <h2 class="section-headline">Trusted by the Sovereign Web.</h2>
+      
+      <div class="testimonials">
+        <blockquote class="testimonial">
+          <p class="quote-text">"The only transcript tool that actually respects my privacy. No accounts, no tracking, just works."</p>
+          <cite class="quote-author">— Nostr pleb</cite>
+        </blockquote>
+        
+        <blockquote class="testimonial">
+          <p class="quote-text">"Finally, a tube ripper that doesn't want my email. Client-side sovereignty matters."</p>
+          <cite class="quote-author">— Bitcoin maxi</cite>
+        </blockquote>
+        
+        <blockquote class="testimonial">
+          <p class="quote-text">"Sub-second extraction. I've timed it. This thing is absurdly fast."</p>
+          <cite class="quote-author">— Course hoarder</cite>
+        </blockquote>
+      </div>
+      
+      <div class="nostr-follow">
+        <p class="follow-label">Follow the build on Nostr:</p>
+        <code class="npub">npub1abc123...xyz789</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <h2 class="section-headline">No Strings. No Subscriptions.</h2>
+      
+      <div class="pricing-grid">
+        <div class="price-card free">
+          <div class="price-badge">THE TOOL</div>
+          <h3 class="price-title">Free Forever</h3>
+          <ul class="price-features">
+            <li>All features unlocked</li>
+            <li>Unlimited transcript extractions</li>
+            <li>Works on all supported platforms</li>
+            <li>Zero data harvesting</li>
+            <li>No account required</li>
+          </ul>
+          <div class="price-amount">0 sats</div>
+        </div>
+        
+        <div class="price-card v4v" id="v4vCard">
+          <div class="price-badge">TO SUPPORT</div>
+          <h3 class="price-title">Value-for-Value (V4V)</h3>
+          <p class="price-desc">If this tool saves you time, consider sending a Zap or supporting via Lightning. Not required—just appreciated.</p>
+          <div class="lightning-box">
+            <svg class="lightning-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/>
+            </svg>
+            <span class="lightning-address">⚡ flaxhorse13@primal.net</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-headline">Questions? Answered.</h2>
+      
+      <div class="faq-grid">
+        <details class="faq-item">
+          <summary class="faq-question">How does local extraction work?</summary>
+          <div class="faq-answer">
+            <p>When you click Ditto, it reads the video's existing caption track directly from the page DOM. This data is already loaded in your browser—Ditto simply extracts and formats it. Nothing leaves your device. No server requests. No API calls. Pure client-side processing.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">Is it really free?</summary>
+          <div class="faq-answer">
+            <p>Yes. Ditto is MIT-licensed open-source software. There are no premium tiers, no paywalls, no "free trials." The V4V model means you can optionally support development via Lightning, but the tool is fully functional without payment.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">What platforms are supported?</summary>
+          <div class="faq-answer">
+            <p>Ditto is built to identify transcript elements on most major platforms. While we optimize for giants like Udemy and Coursera, the tool's heuristic engine is designed to find "hidden" text on almost any platform with a native video player.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">Why should I trust this extension?</summary>
+          <div class="faq-answer">
+            <p>Every line of code is public on GitHub. The extension requests only two permissions: activeTab (to read the current page when you click) and clipboardWrite (to copy the transcript). No background data collection. No analytics. Audit it yourself.</p>
+          </div>
+        </details>
+      </div>
+      
+      <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="cta-primary cta-bottom">
+        <svg class="chrome-icon" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+        </svg>
+        Add to Browser — It's Free
+      </a>
+    </div>
+  </section>
+
+  <!-- Lightning Modal -->
+  <div class="lightning-modal" id="lightningModal">
+    <div class="lightning-modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <h3 class="modal-title">Support Ditto via Lightning</h3>
+      <div class="qr-placeholder">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=lightning:flaxhorse13@primal.net" alt="Lightning QR Code" class="qr-code">
+      </div>
+      <div class="lightning-address-box">
+        <code class="lightning-address-text" id="lightningAddress">flaxhorse13@primal.net</code>
+        <button class="copy-btn" id="copyBtn">Copy</button>
+      </div>
+      <a href="lightning:flaxhorse13@primal.net" class="open-wallet-btn">Open in Wallet</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <!-- Creator Section -->
+      <div class="creator-section">
+        <img src="images/jasper-van-de-ree.webp" alt="Jasper van de Ree" class="creator-photo">
+        <p class="creator-text">Hey <span class="wave-emoji">👋</span> I'm <a href="https://jaspervanderee.com" target="_blank" rel="noopener" class="creator-link">Jasper</a>, the creator of Ditto. Follow my work on <a href="https://njump.me/npub165w944kqt29hrt90l2ssc0rvmhf0u77dgezskknfnczr7r030v0s2g6kae" target="_blank" rel="noopener" class="creator-link">Nostr</a>.</p>
+      </div>
+      
+      <!-- Footer Grid -->
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 class="footer-col-title">Compare</h4>
+          <ul class="footer-col-list">
+            <li><a href="#" class="footer-col-link">Ditto vs NoteGPT</a></li>
+            <li><a href="#" class="footer-col-link">Ditto vs YouTube-Transcript.io</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4 class="footer-col-title">Formats</h4>
+          <ul class="footer-col-list">
+            <li><a href="#" class="footer-col-link">YouTube to Text</a></li>
+            <li><a href="#" class="footer-col-link">YouTube to SRT</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4 class="footer-col-title">Utility</h4>
+          <ul class="footer-col-list">
+            <li><a href="#" class="footer-col-link">For Notetakers</a></li>
+            <li><a href="#" class="footer-col-link">For Creators</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4 class="footer-col-title">Resources</h4>
+          <ul class="footer-col-list">
+            <li><a href="privacy.html" class="footer-col-link">Privacy Promise</a></li>
+            <li>
+              <a href="https://github.com/jaspervanderee/ditto" target="_blank" rel="noopener" class="footer-col-link footer-col-link-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="footer-col-icon">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                View Source
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="footer-brand">
+          <img src="icons/icon48-dark.png" alt="Ditto" class="footer-logo">
+          <span class="footer-tagline">Transcript Generator. Privacy First.</span>
+        </div>
+        <p class="footer-copy">MIT License. Your data belongs to you.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="landing.js"></script>
+</body>
+</html>
