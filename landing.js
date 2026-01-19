@@ -1,5 +1,23 @@
 // Landing Page - Minimal Interactivity
 
+// Dynamic Year Update
+const yearElement = document.getElementById('currentYear');
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
+
+// Sats Slot Machine Animation
+const satsSlot = document.getElementById('satsSlot');
+if (satsSlot) {
+  const satAmounts = [21, 100, 210, 500, 1000, 1500, 2100, 5000, 10000, 21000];
+  let currentIndex = 0;
+  
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % satAmounts.length;
+    satsSlot.textContent = satAmounts[currentIndex].toLocaleString();
+  }, 1500);
+}
+
 // Smooth scroll for anchor links (fallback for older browsers)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {

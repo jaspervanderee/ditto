@@ -1,13 +1,12 @@
 // Content script - extracts transcript from page
-// Uses polling (setInterval) instead of MutationObserver to avoid scroll blocking
+// Uses MutationObserver for efficient DOM monitoring
 // Only runs on-demand when user clicks extension icon
 
 (function() {
   'use strict';
 
   const TIMESTAMP_REGEX = /\b\d{0,2}:?\d{1,2}:\d{2}\b/g;
-  const POLL_INTERVAL = 500;
-  const POLL_TIMEOUT = 10000;
+  const OBSERVER_TIMEOUT = 10000;
   const GENERIC_WAIT_AFTER_CLICK = 1000;
 
   // Transcript button text patterns (case-insensitive)
@@ -17,11 +16,6 @@
     'open transcript',
     'transcript'
   ];
-
-  function hasTimestamps(text) {
-    const matches = text.match(TIMESTAMP_REGEX);
-    return matches && matches.length >= 3;
-  }
 
   function removeTimestamps(text) {
     return text.replace(TIMESTAMP_REGEX, '').trim();
@@ -149,29 +143,37 @@
     return lines.length > 0 ? lines.join(' ') : null;
   }
 
-  function pollForYouTubeTranscript(resolve) {
-    const startTime = Date.now();
-    let clickAttempted = false;
-
-    const interval = setInterval(() => {
-      const transcript = getYouTubeTranscript();
-      
-      if (transcript) {
-        clearInterval(interval);
-        resolve({ transcript: processText(transcript) });
-        return;
+  function observeYouTubeTranscript() {
+    return new Promise(resolve => {
+      // Check if transcript already exists
+      const existing = getYouTubeTranscript();
+      if (existing) {
+        const processed = processText(existing);
+        if (processed) return resolve({ transcript: processed });
       }
 
-      if (!clickAttempted) {
-        clickShowTranscript();
-        clickAttempted = true;
-      }
+      // Trigger transcript panel
+      clickShowTranscript();
 
-      if (Date.now() - startTime > POLL_TIMEOUT) {
-        clearInterval(interval);
+      // Set up observer
+      const observer = new MutationObserver(() => {
+        const transcript = getYouTubeTranscript();
+        if (transcript) {
+          observer.disconnect();
+          clearTimeout(timeout);
+          const processed = processText(transcript);
+          resolve(processed ? { transcript: processed } : { error: 'No transcript found' });
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+
+      // Fail-safe timeout
+      const timeout = setTimeout(() => {
+        observer.disconnect();
         resolve({ error: 'No transcript found' });
-      }
-    }, POLL_INTERVAL);
+      }, OBSERVER_TIMEOUT);
+    });
   }
 
 
@@ -305,19 +307,8 @@
     const hostname = window.location.hostname;
 
     if (hostname.includes('youtube.com')) {
-      // Check if transcript is already visible
-      const existing = getYouTubeTranscript();
-      if (existing) {
-        const processed = processText(existing);
-        if (processed) {
-          return Promise.resolve({ transcript: processed });
-        }
-      }
-
-      // Start polling with auto-click
-      return new Promise(resolve => pollForYouTubeTranscript(resolve));
+      return observeYouTubeTranscript();
     } else {
-      // Generic sites with heuristic clicking
       return scrapeGeneric();
     }
   }

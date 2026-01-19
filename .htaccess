@@ -1,0 +1,8 @@
+# Redirect www to non-www (HTTPS)
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.dittotranscriptgenerator\.com [NC]
+RewriteRule ^(.*)$ https://dittotranscriptgenerator.com/$1 [L,R=301]
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

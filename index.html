@@ -6,14 +6,33 @@
   <meta name="description" content="The privacy-first YouTube video transcript extractor. 100% local processing, zero data harvesting. Instantly rip text from YouTube, Circle, Teachable, and Kajabi.">
   <meta name="keywords" content="YouTube transcript generator, video transcript generator, YouTube video transcript generator, YouTube transcript extractor, transcript generator, tube ripper, text extractor, transcript extractor, caption generator">
   <meta name="author" content="Ditto">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://dittotranscriptgenerator.com/">
+  
+  <!-- Open Graph -->
   <meta property="og:title" content="Ditto — YouTube Transcript Generator">
   <meta property="og:description" content="The privacy-first YouTube video transcript extractor. 100% local. Zero data tax.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dittotranscriptgenerator.com/">
+  <meta property="og:image" content="https://dittotranscriptgenerator.com/images/ditto-transcript-generator-social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Ditto Transcript Generator">
+  
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ditto — YouTube Transcript Generator">
   <meta name="twitter:description" content="The privacy-first YouTube video transcript extractor. 100% local. Zero data tax.">
+  <meta name="twitter:image" content="https://dittotranscriptgenerator.com/images/ditto-transcript-generator-social.png">
+  
   <link rel="icon" type="image/png" href="icons/icon32-bg.png">
   <title>Ditto — YouTube Transcript Generator | Privacy-First Video Text Extractor</title>
+  
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="images/ditto-transcript-logo-yellow.svg" as="image" type="image/svg+xml">
+  <link rel="preload" href="landing.css" as="style">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -27,7 +46,7 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "How does local extraction work?",
+        "name": "How does Ditto's local transcript extraction work?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "When you click Ditto, it reads the video's existing caption track directly from the page DOM. This data is already loaded in your browser—Ditto simply extracts and formats it. Nothing leaves your device. No server requests. No API calls. Pure client-side processing."
@@ -35,28 +54,124 @@
       },
       {
         "@type": "Question",
-        "name": "Is it really free?",
+        "name": "Is Ditto really free to use?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Ditto is MIT-licensed open-source software. There are no premium tiers, no paywalls, no \"free trials.\" The V4V model means you can optionally support development via Lightning, but the tool is fully functional without payment."
+          "text": "Yes. Ditto is MIT-licensed open-source software. There are no premium tiers, no paywalls, no free trials. The V4V model means you can optionally support development via Lightning, but the tool is fully functional without payment."
         }
       },
       {
         "@type": "Question",
-        "name": "What platforms are supported?",
+        "name": "What video platforms does Ditto support?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ditto is built to identify transcript elements on most major platforms. While we optimize for giants like Udemy and Coursera, the tool's heuristic engine is designed to find \"hidden\" text on almost any platform with a native video player."
+          "text": "Ditto is built to identify transcript elements on most major platforms. While we optimize for YouTube, Udemy, and Coursera, the tool's heuristic engine is designed to find hidden text on almost any platform with a native video player."
         }
       },
       {
         "@type": "Question",
-        "name": "Why should I trust this extension?",
+        "name": "Why should I trust the Ditto browser extension?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Every line of code is public on GitHub. The extension requests only two permissions: activeTab (to read the current page when you click) and clipboardWrite (to copy the transcript). No background data collection. No analytics. Audit it yourself."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best YouTube transcript generator for privacy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ditto is the only 100% local, no-account transcript extractor built for the sovereign web. Unlike cloud-based tools, Ditto processes everything in your browser with zero data leaving your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I extract transcripts from Teachable, Kajabi, or Circle.so?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ditto's universal heuristic engine identifies text elements on most gated course platforms automatically. Simply navigate to any video with captions and click the Ditto icon to extract the transcript."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I export YouTube transcripts directly to Markdown or Notion?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Ditto copies clean text to your clipboard, perfectly formatted for instant pasting into Notion, Obsidian, or any Markdown editor. No reformatting required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Ditto different from AI-wrapper tools like NoteGPT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Unlike NoteGPT, Ditto does not require a login, has no paywalls, and never sends your data to a remote server for processing. It's a pure client-side utility that respects your privacy."
+        }
       }
+    ]
+  }
+  </script>
+  
+  <!-- SoftwareApplication Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Ditto — YouTube Transcript Generator",
+    "description": "The privacy-first YouTube video transcript extractor. 100% local processing, zero data harvesting. Instantly rip text from YouTube, Circle, Teachable, and Kajabi.",
+    "applicationCategory": "BrowserExtension",
+    "operatingSystem": "Chrome, Edge, Brave",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Jasper van de Ree",
+      "url": "https://jaspervanderee.com"
+    },
+    "license": "https://opensource.org/licenses/MIT",
+    "url": "https://dittotranscriptgenerator.com",
+    "downloadUrl": "https://chrome.google.com/webstore",
+    "softwareVersion": "1.0",
+    "permissions": "activeTab, clipboardWrite"
+  }
+  </script>
+  
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://dittotranscriptgenerator.com"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ditto",
+    "url": "https://dittotranscriptgenerator.com",
+    "logo": "https://dittotranscriptgenerator.com/images/ditto-transcript-logo-yellow.svg",
+    "founder": {
+      "@type": "Person",
+      "name": "Jasper van de Ree",
+      "url": "https://jaspervanderee.com"
+    },
+    "sameAs": [
+      "https://jaspervanderee.com",
+      "https://njump.me/npub165w944kqt29hrt90l2ssc0rvmhf0u77dgezskknfnczr7r030v0s2g6kae",
+      "https://github.com/jaspervanderee/ditto"
     ]
   }
   </script>
@@ -73,10 +188,11 @@
     </div>
     
     <div class="container hero-content">
-      <img src="images/ditto-transcript-logo-yellow.svg" alt="Ditto" class="hero-logo">
+      <img src="images/ditto-transcript-logo-yellow.svg" alt="Ditto - Privacy-First YouTube Transcript Generator" class="hero-logo">
       
-      <h1 class="hero-headline">YouTube Transcript Generator</h1>
-      <p class="hero-subline">The privacy-first YouTube video transcript extractor. 100% local. Zero data tax. Rip text instantly from YouTube, Circle, Teachable, and Kajabi.</p>
+      <h1 class="hero-headline">Privacy-First YouTube Transcript Generator</h1>
+      <h2 class="hero-tagline">Extract text from any video instantly—100% local, no login, and free forever.</h2>
+      <p class="hero-subline">Stop pasting URLs into cloud tools. Ditto is an open-source video transcript generator and tube ripper that runs in your browser. Get text from YouTube, Teachable, and Kajabi with zero data tax.</p>
       
       <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="cta-primary">
         <svg class="chrome-icon" viewBox="0 0 24 24" fill="none">
@@ -185,36 +301,60 @@
         <!-- Animated Cursor -->
         <div class="cursor"></div>
       </div>
+      
+      <!-- Compatibility Banner -->
+      <div class="compatibility-inline">
+        <span class="compatibility-label">GET TRANSCRIPTS FROM ANYWHERE</span>
+        <div class="compatibility-logos">
+          <div class="logo-track">
+            <img src="images/youtube-logo.svg" alt="YouTube transcript generator compatible" class="compat-logo">
+            <img src="images/coursera-logo.svg" alt="Coursera transcript extractor compatible" class="compat-logo">
+            <img src="images/udemy-logo.svg" alt="Udemy transcript generator compatible" class="compat-logo">
+            <img src="images/teachable-transcript-generator-logo.svg" alt="Teachable transcript extractor compatible" class="compat-logo">
+            <img src="images/kajabi-transcript-generator-logo.svg" alt="Kajabi transcript generator compatible" class="compat-logo">
+            <img src="images/circle-transcript-generator-logo.svg" alt="Circle.so transcript extractor compatible" class="compat-logo">
+            <!-- Duplicate for infinite scroll on mobile -->
+            <img src="images/youtube-logo.svg" alt="" class="compat-logo compat-logo-dup" aria-hidden="true">
+            <img src="images/coursera-logo.svg" alt="" class="compat-logo compat-logo-dup" aria-hidden="true">
+            <img src="images/udemy-logo.svg" alt="" class="compat-logo compat-logo-dup" aria-hidden="true">
+            <img src="images/teachable-transcript-generator-logo.svg" alt="" class="compat-logo compat-logo-dup" aria-hidden="true">
+            <img src="images/kajabi-transcript-generator-logo.svg" alt="" class="compat-logo compat-logo-dup" aria-hidden="true">
+            <img src="images/circle-transcript-generator-logo.svg" alt="" class="compat-logo compat-logo-dup" aria-hidden="true">
+          </div>
+        </div>
+        <p class="compatibility-tagline">Rips text from 100+ platforms including gated courses and private communities.</p>
+      </div>
     </div>
   </header>
 
   <!-- Comparison Section -->
   <section class="comparison" id="comparison">
     <div class="container">
+      <h2 class="section-headline">Ditto vs Cloud-Based Transcript Tools</h2>
       <div class="comparison-table">
         <div class="comparison-col ditto">
           <h3 class="col-header">
-            <img src="images/ditto-transcript-logo-yellow.svg" alt="Ditto" class="col-logo-img">
+            <img src="images/ditto-transcript-logo-yellow.svg" alt="Ditto local transcript generator" class="col-logo-img">
           </h3>
           <ul class="col-list">
             <li class="col-item good">
-              <img src="images/checkmark.svg" alt="" class="item-icon">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
               Your data stays yours.
             </li>
             <li class="col-item good">
-              <img src="images/checkmark.svg" alt="" class="item-icon">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
               100% local, No servers.
             </li>
             <li class="col-item good">
-              <img src="images/checkmark.svg" alt="" class="item-icon">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
               No signup.
             </li>
             <li class="col-item good">
-              <img src="images/checkmark.svg" alt="" class="item-icon">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
               Open source.
             </li>
             <li class="col-item good">
-              <img src="images/checkmark.svg" alt="" class="item-icon">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
               Unlimited free use.
             </li>
           </ul>
@@ -228,28 +368,28 @@
         
         <div class="comparison-col cloud">
           <h3 class="col-header">
-            <img src="images/cloud.svg" alt="" class="col-icon-img">
+            <img src="images/cloud.svg" alt="Cloud-based transcript tools" class="col-icon-img">
             <span class="col-title">Cloud Converters</span>
           </h3>
           <ul class="col-list">
             <li class="col-item bad">
-              <img src="images/cross.svg" alt="" class="item-icon">
+              <img src="images/cross.svg" alt="Feature missing" class="item-icon">
               Harvests your data.
             </li>
             <li class="col-item bad">
-              <img src="images/cross.svg" alt="" class="item-icon">
+              <img src="images/cross.svg" alt="Feature missing" class="item-icon">
               Server-side processing.
             </li>
             <li class="col-item bad">
-              <img src="images/cross.svg" alt="" class="item-icon">
+              <img src="images/cross.svg" alt="Feature missing" class="item-icon">
               Account required.
             </li>
             <li class="col-item bad">
-              <img src="images/cross.svg" alt="" class="item-icon">
+              <img src="images/cross.svg" alt="Feature missing" class="item-icon">
               Closed source.
             </li>
             <li class="col-item bad">
-              <img src="images/cross.svg" alt="" class="item-icon">
+              <img src="images/cross.svg" alt="Feature missing" class="item-icon">
               Paywall.
             </li>
           </ul>
@@ -269,12 +409,12 @@
   <!-- Features Section -->
   <section class="features" id="features">
     <div class="container">
-      <h2 class="section-headline">Built for the Sovereign Web</h2>
+      <h2 class="section-headline">Built for Course Platforms</h2>
       
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon feature-icon-youtube">
-            <img src="images/youtube-transcript-generator-logo.svg" alt="" class="feature-icon-img">
+            <img src="images/youtube-transcript-generator-logo.svg" alt="YouTube transcript extractor tool icon" class="feature-icon-img">
           </div>
           <h3 class="feature-title">YouTube Transcript Extractor</h3>
           <p class="feature-desc">Universal discovery for course platforms. Extract transcripts from YouTube, Circle, Teachable, Kajabi, and any site with embedded video players.</p>
@@ -282,7 +422,7 @@
         
         <div class="feature-card">
           <div class="feature-icon feature-icon-udemy">
-            <img src="images/udemy-transcript-generator-logo.svg" alt="" class="feature-icon-img">
+            <img src="images/udemy-transcript-generator-logo.svg" alt="Udemy transcript generator tool icon" class="feature-icon-img">
           </div>
           <h3 class="feature-title">Tube Ripper</h3>
           <p class="feature-desc">1-click clipboard ripping. No fumbling with settings—just click Ditto and the full transcript lands in your clipboard. Paste anywhere.</p>
@@ -290,7 +430,7 @@
         
         <div class="feature-card">
           <div class="feature-icon feature-icon-coursera">
-            <img src="images/coursera-transcript-generator-logo.svg" alt="" class="feature-icon-img">
+            <img src="images/coursera-transcript-generator-logo.svg" alt="Coursera transcript extractor tool icon" class="feature-icon-img">
           </div>
           <h3 class="feature-title">Video Text Extractor</h3>
           <p class="feature-desc">Minimal permissions required. Only activeTab and clipboardWrite. No access to history, bookmarks, or browsing data. Audit the source yourself.</p>
@@ -299,28 +439,31 @@
     </div>
   </section>
 
-  <!-- Compatibility Banner -->
-  <section class="compatibility" id="compatibility">
+  <!-- Privacy-First Section -->
+  <section class="privacy-first" id="privacy-first">
     <div class="container">
-      <span class="compatibility-label">UNIVERSAL TRANSCRIPT DISCOVERY</span>
-      <div class="compatibility-logos">
-        <div class="logo-track">
-          <img src="images/youtube-logo.svg" alt="YouTube" class="compat-logo">
-          <img src="images/coursera-logo.svg" alt="Coursera transcript generator logo" class="compat-logo">
-          <img src="images/udemy-logo.svg" alt="Udemy transcript generator logo" class="compat-logo">
-          <img src="images/teachable-transcript-generator-logo.svg" alt="Teachable transcript generator logo" class="compat-logo">
-          <img src="images/kajabi-transcript-generator-logo.svg" alt="Kajabi transcript generator logo" class="compat-logo">
-          <img src="images/circle-transcript-generator-logo.svg" alt="Circle.so" class="compat-logo">
-          <!-- Duplicate for infinite scroll -->
-          <img src="images/youtube-logo.svg" alt="YouTube" class="compat-logo compat-logo-dup" aria-hidden="true">
-          <img src="images/coursera-logo.svg" alt="Coursera transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
-          <img src="images/udemy-logo.svg" alt="Udemy transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
-          <img src="images/teachable-transcript-generator-logo.svg" alt="Teachable transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
-          <img src="images/kajabi-transcript-generator-logo.svg" alt="Kajabi transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
-          <img src="images/circle-transcript-generator-logo.svg" alt="Circle transcript generator logo" class="compat-logo compat-logo-dup" aria-hidden="true">
+      <p class="privacy-origin">🇳🇱 Founded in Holland. We respect your privacy.</p>
+      <h2 class="section-headline">Built for Privacy</h2>
+      
+      <div class="privacy-grid">
+        <div class="privacy-card">
+          <img src="images/ditto-private.svg" alt="Ditto local-only data processing icon" class="privacy-icon-img">
+          <h3 class="privacy-title">No access to your data</h3>
+          <p class="privacy-desc">No servers. No uploads. Ditto rips and formats transcripts entirely within your local browser session. We have zero access to your transcripts, your watch history, or your learning habits.</p>
+        </div>
+        
+        <div class="privacy-card">
+          <img src="images/ditto-secure.svg" alt="Privacy and security verification icon" class="privacy-icon-img">
+          <h3 class="privacy-title">100% private and secure</h3>
+          <p class="privacy-desc">We don't want your email, your name, or your credit card. Your identity remains your own.</p>
+        </div>
+        
+        <div class="privacy-card">
+          <img src="images/ditto-open-source.svg" alt="Open source code verification icon" class="privacy-icon-img">
+          <h3 class="privacy-title">Open Source</h3>
+          <p class="privacy-desc">Don't trust, verify. Every line of Ditto's code is public on GitHub for anyone to audit, ensuring the tool does exactly what it says and nothing more.</p>
         </div>
       </div>
-      <p class="compatibility-tagline">Rips text from 100+ platforms including gated courses and private communities.</p>
     </div>
   </section>
 
@@ -369,7 +512,9 @@
             <li>Zero data harvesting</li>
             <li>No account required</li>
           </ul>
-          <div class="price-amount">0 sats</div>
+          <div class="price-bottom">
+            <div class="price-amount">0 sats</div>
+          </div>
         </div>
         
         <div class="price-card v4v" id="v4vCard">
@@ -382,6 +527,10 @@
             </svg>
             <span class="lightning-address">⚡ flaxhorse13@primal.net</span>
           </div>
+          <div class="price-bottom">
+            <div class="price-amount"><span id="satsSlot">100</span> sats</div>
+            <span class="price-subtext">(up to you)</span>
+          </div>
         </div>
       </div>
       
@@ -391,34 +540,63 @@
   <!-- FAQ Section -->
   <section class="faq" id="faq">
     <div class="container">
-      <h2 class="section-headline">Questions? Answered.</h2>
+      <h2 class="section-headline">Frequently Asked Questions</h2>
+      <p class="section-subline">Answers to common questions about our professional transcript extractor for students, creators, and researchers.</p>
       
       <div class="faq-grid">
         <details class="faq-item">
-          <summary class="faq-question">How does local extraction work?</summary>
+          <summary class="faq-question">How does Ditto's local transcript extraction work?</summary>
           <div class="faq-answer">
             <p>When you click Ditto, it reads the video's existing caption track directly from the page DOM. This data is already loaded in your browser—Ditto simply extracts and formats it. Nothing leaves your device. No server requests. No API calls. Pure client-side processing.</p>
           </div>
         </details>
         
         <details class="faq-item">
-          <summary class="faq-question">Is it really free?</summary>
+          <summary class="faq-question">Is Ditto really free to use?</summary>
           <div class="faq-answer">
-            <p>Yes. Ditto is MIT-licensed open-source software. There are no premium tiers, no paywalls, no "free trials." The V4V model means you can optionally support development via Lightning, but the tool is fully functional without payment.</p>
+            <p>Yes. Ditto is MIT-licensed open-source software. There are no premium tiers, no paywalls, no free trials. The V4V model means you can optionally support development via Lightning, but the tool is fully functional without payment.</p>
           </div>
         </details>
         
         <details class="faq-item">
-          <summary class="faq-question">What platforms are supported?</summary>
+          <summary class="faq-question">What video platforms does Ditto support?</summary>
           <div class="faq-answer">
-            <p>Ditto is built to identify transcript elements on most major platforms. While we optimize for giants like Udemy and Coursera, the tool's heuristic engine is designed to find "hidden" text on almost any platform with a native video player.</p>
+            <p>Ditto is built to identify transcript elements on most major platforms. While we optimize for YouTube, Udemy, and Coursera, the tool's heuristic engine is designed to find hidden text on almost any platform with a native video player.</p>
           </div>
         </details>
         
         <details class="faq-item">
-          <summary class="faq-question">Why should I trust this extension?</summary>
+          <summary class="faq-question">Why should I trust the Ditto browser extension?</summary>
           <div class="faq-answer">
             <p>Every line of code is public on GitHub. The extension requests only two permissions: activeTab (to read the current page when you click) and clipboardWrite (to copy the transcript). No background data collection. No analytics. Audit it yourself.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">What is the best YouTube transcript generator for privacy?</summary>
+          <div class="faq-answer">
+            <p>Ditto is the only 100% local, no-account transcript extractor built for the sovereign web. Unlike cloud-based tools, Ditto processes everything in your browser with zero data leaving your device.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">How do I extract transcripts from Teachable, Kajabi, or Circle.so?</summary>
+          <div class="faq-answer">
+            <p>Ditto's universal heuristic engine identifies text elements on most gated course platforms automatically. Simply navigate to any video with captions and click the Ditto icon to extract the transcript.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">Can I export YouTube transcripts directly to Markdown or Notion?</summary>
+          <div class="faq-answer">
+            <p>Yes. Ditto copies clean text to your clipboard, perfectly formatted for instant pasting into Notion, Obsidian, or any Markdown editor. No reformatting required.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">How is Ditto different from AI-wrapper tools like NoteGPT?</summary>
+          <div class="faq-answer">
+            <p>Unlike NoteGPT, Ditto does not require a login, has no paywalls, and never sends your data to a remote server for processing. It's a pure client-side utility that respects your privacy.</p>
           </div>
         </details>
       </div>
@@ -461,18 +639,19 @@
       <!-- Footer Grid -->
       <div class="footer-grid">
         <div class="footer-col">
+          <h4 class="footer-col-title">How it works</h4>
+          <ul class="footer-col-list">
+            <li><a href="#" class="footer-col-link">How to extract transcripts from Teachable</a></li>
+            <li><a href="#" class="footer-col-link">How to get transcripts from Kajabi</a></li>
+            <li><a href="#" class="footer-col-link">Extracting text from Circle.so communities.</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
           <h4 class="footer-col-title">Compare</h4>
           <ul class="footer-col-list">
             <li><a href="#" class="footer-col-link">Ditto vs NoteGPT</a></li>
             <li><a href="#" class="footer-col-link">Ditto vs YouTube-Transcript.io</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-col">
-          <h4 class="footer-col-title">Formats</h4>
-          <ul class="footer-col-list">
-            <li><a href="#" class="footer-col-link">YouTube to Text</a></li>
-            <li><a href="#" class="footer-col-link">YouTube to SRT</a></li>
           </ul>
         </div>
         
@@ -498,15 +677,23 @@
             </li>
           </ul>
         </div>
+        
+        <div class="footer-col">
+          <h4 class="footer-col-title">More</h4>
+          <ul class="footer-col-list">
+            <li><a href="https://buoybitcoin.com/" target="_blank" rel="noopener" class="footer-col-link">Buoy Bitcoin</a></li>
+            <li><a href="https://breen.studio/" target="_blank" rel="noopener" class="footer-col-link">Studio Breen</a></li>
+          </ul>
+        </div>
       </div>
       
       <!-- Footer Bottom -->
       <div class="footer-bottom">
         <div class="footer-brand">
-          <img src="icons/icon48-dark.png" alt="Ditto" class="footer-logo">
+          <img src="icons/icon48-dark.png" alt="Ditto transcript generator logo" class="footer-logo">
           <span class="footer-tagline">Transcript Generator. Privacy First.</span>
         </div>
-        <p class="footer-copy">MIT License. Your data belongs to you.</p>
+        <p class="footer-copy"><span id="currentYear">2026</span> Ditto. MIT License. Your data belongs to you.</p>
       </div>
     </div>
   </footer>

@@ -3,17 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy — Ditto</title>
+  <meta name="description" content="Ditto Privacy Policy - Your data never leaves your browser. Zero-data architecture with full transparency.">
+  <title>Privacy — Ditto Transcript Generator</title>
+  <link rel="canonical" href="https://dittotranscriptgenerator.com/privacy.html">
+  <link rel="icon" type="image/png" href="icons/icon32-bg.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="privacy.css">
 </head>
 <body>
-  <main class="privacy-page">
-    
-    <!-- Header -->
-    <header class="header">
-      <img src="icons/icon128-dark.png" alt="Ditto" class="brand-icon">
-    </header>
+  <!-- Fixed Logo -->
+  <a href="index.html">
+    <img src="images/ditto-transcript-logo-yellow.svg" alt="Ditto" class="brand-logo">
+  </a>
 
+  <main class="privacy-page">
     <!-- Hero: Zero-Data Guarantee -->
     <section class="hero">
       <h1 class="headline">Your data never leaves your browser.</h1>
@@ -77,19 +82,26 @@
       <p class="trackers-statement">We don't know who you are. We don't want to. Your privacy is not a feature — it's the foundation.</p>
     </section>
 
-    <!-- Back Button -->
-    <button class="back-button" id="backBtn">Back to Home</button>
+    <!-- CTA -->
+    <a href="index.html" class="cta-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to Home
+    </a>
 
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-copy"><span id="currentYear">2026</span> Ditto. MIT License. Your data belongs to you.</p>
+    </footer>
   </main>
+
   <script>
-    document.getElementById('backBtn').addEventListener('click', () => {
-      // Try to go back in history, otherwise open onboarding
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = 'onboarding.html';
-      }
-    });
+    // Dynamic Year Update
+    const yearElement = document.getElementById('currentYear');
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
   </script>
 </body>
 </html>

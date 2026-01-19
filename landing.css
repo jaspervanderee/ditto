@@ -179,12 +179,23 @@ body {
   color: var(--white);
 }
 
-.hero-subline {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: var(--white-dim);
+.hero-tagline {
+  font-size: clamp(1.125rem, 3vw, 1.375rem);
+  font-weight: 500;
+  color: var(--white);
   max-width: 600px;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.hero-subline {
+  font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+  color: var(--white-dim);
+  max-width: 500px;
   margin-bottom: 2rem;
   line-height: 1.6;
+  text-align: center;
 }
 
 /* CTA Button */
@@ -856,8 +867,70 @@ body {
 }
 
 /* =============================================
-   COMPATIBILITY BANNER
+   PRIVACY-FIRST SECTION
    ============================================= */
+.privacy-first {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, var(--dark-blue) 0%, var(--black) 100%);
+}
+
+.privacy-origin {
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--white-dim);
+  margin-bottom: 0.75rem;
+}
+
+.privacy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.privacy-card {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform var(--transition-med), box-shadow var(--transition-med);
+}
+
+.privacy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.privacy-icon-img {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.25rem;
+  display: block;
+}
+
+.privacy-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+}
+
+.privacy-desc {
+  font-size: 0.9375rem;
+  color: var(--white-dim);
+  line-height: 1.6;
+}
+
+/* =============================================
+   COMPATIBILITY BANNER (Inline in Hero)
+   ============================================= */
+.compatibility-inline {
+  margin-top: 2rem;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+}
+
 .compatibility {
   padding: 2rem 0;
   background: transparent;
@@ -870,7 +943,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--white-dim);
+  color: var(--white);
   margin-bottom: 2rem;
 }
 
@@ -1057,9 +1130,12 @@ body {
   border-radius: 16px;
   padding: 2rem 1.5rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .price-card.v4v {
+  border: 1px solid var(--yellow);
   box-shadow: 0 0 40px rgba(255, 255, 138, 0.15), 0 0 80px rgba(255, 255, 138, 0.08);
   cursor: pointer;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -1073,6 +1149,7 @@ body {
 .price-card.v4v .price-title {
   color: var(--white);
 }
+
 
 .price-badge {
   display: inline-block;
@@ -1115,10 +1192,27 @@ body {
   font-weight: 700;
 }
 
+.price-bottom {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.price-card.free .price-bottom {
+  padding-bottom: 1.75rem;
+}
+
 .price-amount {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--yellow);
+}
+
+.price-subtext {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--white-dim);
+  text-align: center;
+  margin-top: 0.5rem;
 }
 
 .price-desc {
@@ -1164,11 +1258,20 @@ body {
   background: linear-gradient(180deg, var(--black) 0%, var(--dark-blue) 100%);
 }
 
+.faq .section-subline {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--white-dim);
+  max-width: 600px;
+  margin: 0.75rem auto 0;
+  line-height: 1.6;
+}
+
 .faq-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .faq-item {
@@ -1544,8 +1647,24 @@ body {
     gap: 2rem;
   }
   
+  .privacy-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  
+  .privacy-grid .privacy-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
   .footer-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
   
   .footer-bottom {
@@ -1598,6 +1717,15 @@ body {
   
   .features-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .privacy-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .privacy-grid .privacy-card:last-child {
+    grid-column: auto;
+    max-width: none;
   }
   
   .testimonials {

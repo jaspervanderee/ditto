@@ -1,0 +1,8 @@
+# robots.txt for Ditto Transcript Generator
+# https://dittotranscriptgenerator.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://dittotranscriptgenerator.com/sitemap.xml
