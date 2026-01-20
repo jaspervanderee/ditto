@@ -1,0 +1,126 @@
+/* === Teachable Landing Page Specific Styles === */
+
+/* Eyebrow/Span styling */
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 138, 0.3);
+  border-radius: 50px;
+  background: rgba(255, 255, 138, 0.05);
+}
+
+/* SEO H1 - subtle/secondary styling */
+.hero-seo-headline {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 500;
+  color: var(--white-dim);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* Visual H2 - primary visual headline */
+.hero-visual-headline {
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--white);
+}
+
+/* Sovereign solution paragraph */
+.sovereign-solution {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--white-dim);
+  max-width: 680px;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.sovereign-solution strong {
+  color: var(--yellow);
+  font-weight: 600;
+}
+
+/* Privacy trust card specific */
+.privacy-trust-highlight {
+  background: linear-gradient(135deg, rgba(255, 255, 138, 0.08) 0%, rgba(255, 255, 138, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 138, 0.2);
+  padding: 2.5rem 2rem;
+}
+
+.privacy-trust-highlight .privacy-title {
+  color: var(--yellow);
+}
+
+/* Resources/FAQ section */
+.resources {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, var(--black) 0%, var(--dark-blue) 100%);
+}
+
+.resources-intro {
+  text-align: center;
+  font-size: 1.0625rem;
+  color: var(--white-dim);
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+
+/* Breadcrumb styling */
+.breadcrumb {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--white-dim);
+  z-index: 10;
+}
+
+.breadcrumb a {
+  color: var(--white-dim);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+  color: var(--yellow);
+}
+
+.breadcrumb-separator {
+  opacity: 0.5;
+}
+
+.breadcrumb-current {
+  color: var(--yellow-dim);
+}
+
+@media (min-width: 640px) {
+  .breadcrumb {
+    top: 1.5rem;
+    right: 2rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .breadcrumb {
+    display: none;
+  }
+}
+
+/* Active/highlighted platform logo */
+.compat-logo-active {
+  filter: none;
+  opacity: 1;
+}

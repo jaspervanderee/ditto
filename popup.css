@@ -3,8 +3,8 @@
   color-scheme: light dark;
   
   /* Brand Colors */
-  --color-primary: #ffff8a;   /* Yellow */
-  --color-secondary: #1b0159; /* Dark blue */
+  --color-primary: #ffff78;   /* Yellow */
+  --color-secondary: #1d005d; /* Dark blue */
   --color-dark: #000000;      /* Black */
   --color-success: #27C485;   /* A friendly, minty green */
   --color-error: #FF5252;     /* Soft but clear red */
@@ -66,38 +66,55 @@ body {
 
 /* === Loading State === */
 .status.loading .icon-loading {
-  display: block;
-  color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .status.loading .message {
-  color: var(--color-text); /* Keep text neutral to let icon shine */
+  color: var(--color-text);
   opacity: 0.8;
   font-weight: 500;
   animation: pulse-text 2s ease-in-out infinite;
 }
 
-/* A "Breathing" spinner - feels alive, not just mechanical */
-.spinner-arc {
-  transform-origin: center;
-  animation: spin-breath 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-  stroke-linecap: round; /* Friendly rounded ends */
+/* Ditto Echo Dots - bouncing dots that "echo" each other */
+.ditto-loader {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes spin-breath {
-  0% {
-    transform: rotate(0deg);
-    stroke-dasharray: 1, 150;
-    stroke-dashoffset: 0;
+.ditto-loader .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: light-dark(#1d005d, #ffff78);
+  animation: ditto-bounce 1.4s ease-in-out infinite;
+}
+
+.ditto-loader .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.ditto-loader .dot:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.ditto-loader .dot:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+/* Bouncy "echo" effect - dots scale and fade like ripples */
+@keyframes ditto-bounce {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
   }
-  50% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -35;
-  }
-  100% {
-    transform: rotate(360deg);
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -124;
+  40% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
