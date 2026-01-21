@@ -177,6 +177,102 @@
   }
 
 
+  // === UDEMY SCRAPER ===
+
+  const UDEMY_SELECTORS = {
+    toggleButton: 'button[data-purpose="transcript-toggle"]',
+    transcriptPanel: '[data-purpose="transcript-panel"]',
+    cueText: '[data-purpose="cue-text"]'
+  };
+
+  const UDEMY_RENDER_WAIT = 400;
+  const UDEMY_RETRY_WAIT = 500;
+
+  function getUdemyTranscriptText() {
+    const cues = document.querySelectorAll(UDEMY_SELECTORS.cueText);
+    if (cues.length === 0) return null;
+
+    const lines = [];
+    for (const cue of cues) {
+      const text = cue.innerText.trim();
+      if (text) {
+        lines.push(text);
+      }
+    }
+
+    return lines.length > 0 ? lines.join(' ') : null;
+  }
+
+  function isUdemyPanelOpen() {
+    const toggleBtn = document.querySelector(UDEMY_SELECTORS.toggleButton);
+    if (!toggleBtn) return false;
+    return toggleBtn.getAttribute('aria-expanded') === 'true';
+  }
+
+  function clickUdemyTranscriptToggle() {
+    const toggleBtn = document.querySelector(UDEMY_SELECTORS.toggleButton);
+    if (toggleBtn) {
+      toggleBtn.click();
+      return true;
+    }
+    return false;
+  }
+
+  function scrapeUdemy() {
+    return new Promise(resolve => {
+      const toggleBtn = document.querySelector(UDEMY_SELECTORS.toggleButton);
+
+      // No toggle button found - transcript not available for this video
+      if (!toggleBtn) {
+        resolve({ error: 'Udemy transcript not found. Please ensure captions are available for this video.' });
+        return;
+      }
+
+      // Check if panel is already open
+      const panelAlreadyOpen = isUdemyPanelOpen();
+
+      // Open the panel if needed
+      if (!panelAlreadyOpen) {
+        clickUdemyTranscriptToggle();
+      }
+
+      // Wait for DOM to render transcript segments
+      setTimeout(() => {
+        const transcript = getUdemyTranscriptText();
+
+        if (transcript) {
+          const processed = processText(transcript);
+          if (processed) {
+            resolve({ transcript: processed });
+            return;
+          }
+        }
+
+        // First attempt failed - retry once if we had to click
+        if (!panelAlreadyOpen) {
+          setTimeout(() => {
+            const retryTranscript = getUdemyTranscriptText();
+
+            if (retryTranscript) {
+              const processed = processText(retryTranscript);
+              if (processed) {
+                resolve({ transcript: processed });
+                return;
+              }
+            }
+
+            // Still no transcript after retry
+            resolve({ error: 'No transcript found. Please ensure captions are enabled on the video player.' });
+          }, UDEMY_RETRY_WAIT);
+        } else {
+          // Panel was already open but no content found
+          resolve({ error: 'No transcript found. Please ensure captions are enabled on the video player.' });
+        }
+      }, UDEMY_RENDER_WAIT);
+    });
+  }
+
+
   // === GENERIC SCRAPER (Circle.so, Kajabi, Teachable, etc.) ===
 
   // Find transcript container by scanning for timestamp patterns
@@ -308,6 +404,8 @@
 
     if (hostname.includes('youtube.com')) {
       return observeYouTubeTranscript();
+    } else if (hostname.includes('udemy.com')) {
+      return scrapeUdemy();
     } else {
       return scrapeGeneric();
     }
