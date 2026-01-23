@@ -11,6 +11,13 @@ function setStatus(message, type) {
   statusEl.className = 'status ' + type;
 }
 
+// Listen for status updates from content script (e.g., "Fetching Subtitles...")
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.type === 'STATUS_UPDATE' && message.status) {
+    setStatus(message.status, 'loading');
+  }
+});
+
 async function copyToClipboard(text) {
   try {
     await navigator.clipboard.writeText(text);

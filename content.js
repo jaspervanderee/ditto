@@ -273,6 +273,181 @@
   }
 
 
+  // === COURSERA SCRAPER (VTT Track Extraction) ===
+
+  // Parse VTT content: strip headers and timestamps, return clean text
+  function parseVTT(vttContent) {
+    const lines = vttContent.split('\n');
+    const textLines = [];
+    
+    // VTT timestamp pattern: 00:00:10.000 --> 00:00:15.000
+    const vttTimestampRegex = /^\d{2}:\d{2}:\d{2}\.\d{3}\s*-->\s*\d{2}:\d{2}:\d{2}\.\d{3}/;
+    // Cue identifier pattern (numeric or alphanumeric)
+    const cueIdRegex = /^[\d\w-]+$/;
+    
+    let skipNext = false;
+    
+    for (const line of lines) {
+      const trimmed = line.trim();
+      
+      // Skip empty lines
+      if (!trimmed) {
+        skipNext = false;
+        continue;
+      }
+      
+      // Skip WEBVTT header and metadata
+      if (trimmed.startsWith('WEBVTT') || 
+          trimmed.startsWith('NOTE') || 
+          trimmed.startsWith('STYLE') ||
+          trimmed.startsWith('REGION')) {
+        skipNext = true;
+        continue;
+      }
+      
+      // Skip timestamp lines
+      if (vttTimestampRegex.test(trimmed)) {
+        continue;
+      }
+      
+      // Skip cue identifiers (usually numbers before timestamps)
+      if (cueIdRegex.test(trimmed) && trimmed.length < 20) {
+        continue;
+      }
+      
+      // Skip lines after headers
+      if (skipNext) {
+        continue;
+      }
+      
+      // Strip VTT formatting tags like <c>, </c>, <v Speaker>, etc.
+      const cleanLine = trimmed
+        .replace(/<[^>]+>/g, '')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .trim();
+      
+      if (cleanLine) {
+        textLines.push(cleanLine);
+      }
+    }
+    
+    return textLines.join(' ');
+  }
+
+  // Find caption track element, prefer en-US
+  function findCaptionTrack() {
+    // Look for track elements with kind="captions"
+    const tracks = document.querySelectorAll('track[kind="captions"], track[kind="subtitles"]');
+    
+    if (tracks.length === 0) return null;
+    
+    // Prefer en-US
+    for (const track of tracks) {
+      const srclang = track.getAttribute('srclang') || '';
+      if (srclang.toLowerCase() === 'en-us' || srclang.toLowerCase() === 'en') {
+        return track;
+      }
+    }
+    
+    // Check for default or labeled track
+    for (const track of tracks) {
+      if (track.hasAttribute('default') || track.getAttribute('label')) {
+        return track;
+      }
+    }
+    
+    // Fallback to first available track
+    return tracks[0];
+  }
+
+  // Get transcript from Coursera sidebar (fallback method)
+  function getCourseraSidebarTranscript() {
+    const selectors = [
+      '.rc-Transcript',
+      '[data-testid="transcript-panel"]',
+      '[class*="transcript"]',
+      '.video-transcript'
+    ];
+    
+    for (const selector of selectors) {
+      const el = document.querySelector(selector);
+      if (el) {
+        const text = el.innerText || el.textContent;
+        if (text && text.length > 50) {
+          return text;
+        }
+      }
+    }
+    
+    return null;
+  }
+
+  // Send status update to popup
+  function sendStatus(status) {
+    try {
+      chrome.runtime.sendMessage({ type: 'STATUS_UPDATE', status: status });
+    } catch (e) {
+      // Ignore if extension context is invalid
+    }
+  }
+
+  function scrapeCoursera() {
+    return new Promise(async (resolve) => {
+      // Method 1: VTT Track extraction
+      const track = findCaptionTrack();
+      
+      if (track) {
+        const src = track.getAttribute('src');
+        
+        if (src) {
+          try {
+            // Resolve relative URLs
+            const vttUrl = new URL(src, window.location.origin).href;
+            
+            // Notify popup that we're fetching subtitles
+            sendStatus('Fetching Subtitles...');
+            
+            // Fetch the VTT file
+            const response = await fetch(vttUrl);
+            
+            if (response.ok) {
+              const vttContent = await response.text();
+              const rawText = parseVTT(vttContent);
+              
+              if (rawText && rawText.length > 50) {
+                const processed = processText(rawText);
+                if (processed) {
+                  resolve({ transcript: processed });
+                  return;
+                }
+              }
+            }
+          } catch (err) {
+            // VTT fetch failed, fall through to sidebar method
+          }
+        }
+      }
+      
+      // Method 2: Fallback to visual transcript sidebar
+      const sidebarTranscript = getCourseraSidebarTranscript();
+      
+      if (sidebarTranscript) {
+        const processed = processText(sidebarTranscript);
+        if (processed) {
+          resolve({ transcript: processed });
+          return;
+        }
+      }
+      
+      // No transcript found
+      resolve({ error: 'No Coursera transcript found. Ensure captions are available for this video.' });
+    });
+  }
+
+
   // === GENERIC SCRAPER (Circle.so, Kajabi, Teachable, etc.) ===
 
   // Find transcript container by scanning for timestamp patterns
@@ -397,6 +572,312 @@
   }
 
 
+  // === WISTIA SCRAPER (Viewport-Aware Global Extractor) ===
+
+  // Extract Wistia hashed ID (10-character alphanumeric code) from various sources
+  function extractWistiaId(source) {
+    if (!source) return null;
+    
+    // Match ID from URLs: wistia.com/embed/iframe/ID, wistia.net/medias/ID, etc.
+    const urlMatch = source.match(/wistia\.(?:com|net)\/(?:embed\/iframe\/|medias\/)?([a-z0-9]{10})/i);
+    if (urlMatch) return urlMatch[1];
+    
+    // Match ID from class names: wistia_embed wistia_async_ID
+    const classMatch = source.match(/wistia_async_([a-z0-9]{10})/i);
+    if (classMatch) return classMatch[1];
+    
+    // Match standalone 10-char alphanumeric (last resort)
+    const standaloneMatch = source.match(/\b([a-z0-9]{10})\b/i);
+    if (standaloneMatch) return standaloneMatch[1];
+    
+    return null;
+  }
+
+  // Calculate visibility score with center-of-viewport preference
+  function getVisibilityScore(element) {
+    const rect = element.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
+    const viewportCenterY = viewportHeight / 2;
+    const viewportCenterX = viewportWidth / 2;
+    
+    // Element not in viewport at all
+    if (rect.bottom < 0 || rect.top > viewportHeight || 
+        rect.right < 0 || rect.left > viewportWidth) {
+      return 0;
+    }
+    
+    // Calculate visible area ratio
+    const visibleTop = Math.max(0, rect.top);
+    const visibleBottom = Math.min(viewportHeight, rect.bottom);
+    const visibleLeft = Math.max(0, rect.left);
+    const visibleRight = Math.min(viewportWidth, rect.right);
+    
+    const visibleArea = (visibleBottom - visibleTop) * (visibleRight - visibleLeft);
+    const totalArea = rect.width * rect.height;
+    const areaRatio = totalArea > 0 ? visibleArea / totalArea : 0;
+    
+    // Calculate distance from viewport center (closer = better)
+    const elementCenterY = rect.top + rect.height / 2;
+    const elementCenterX = rect.left + rect.width / 2;
+    const distanceFromCenter = Math.sqrt(
+      Math.pow(elementCenterX - viewportCenterX, 2) + 
+      Math.pow(elementCenterY - viewportCenterY, 2)
+    );
+    const maxDistance = Math.sqrt(Math.pow(viewportWidth, 2) + Math.pow(viewportHeight, 2)) / 2;
+    const centerBonus = 1 - (distanceFromCenter / maxDistance);
+    
+    // Combined score: area visibility + center proximity
+    return (areaRatio * 0.6) + (centerBonus * 0.4);
+  }
+
+  // Find the active (most visible) Wistia video and return its hashed ID
+  function getActiveWistiaId() {
+    const candidates = [];
+    
+    // Collect all Wistia iframes
+    const iframes = document.querySelectorAll('iframe[src*="wistia"]');
+    for (const iframe of iframes) {
+      const id = extractWistiaId(iframe.src);
+      if (id) {
+        candidates.push({ element: iframe, id: id, score: getVisibilityScore(iframe) });
+      }
+    }
+    
+    // Collect all Wistia embed containers (for async embeds)
+    const containers = document.querySelectorAll('.wistia_embed, [class*="wistia_async_"]');
+    for (const container of containers) {
+      const id = extractWistiaId(container.className);
+      if (id) {
+        candidates.push({ element: container, id: id, score: getVisibilityScore(container) });
+      }
+    }
+    
+    if (candidates.length === 0) return null;
+    if (candidates.length === 1) return candidates[0].id;
+    
+    // Sort by visibility score (highest first)
+    candidates.sort((a, b) => b.score - a.score);
+    return candidates[0].id;
+  }
+
+  // Recursively search for transcript field in nested JSON-LD structures
+  function findTranscriptInObject(obj, targetId) {
+    if (!obj || typeof obj !== 'object') return null;
+    
+    // Check if this object matches our target video
+    const embedUrl = obj.embedUrl || obj.contentUrl || '';
+    const atId = obj['@id'] || '';
+    const objId = extractWistiaId(embedUrl) || extractWistiaId(atId);
+    
+    // If we have a target and this object has an ID, check for match
+    const isMatch = !targetId || !objId || objId === targetId || 
+                    embedUrl.includes(targetId) || atId.includes(targetId);
+    
+    if (isMatch) {
+      // Check transcript field
+      if (obj.transcript && typeof obj.transcript === 'string' && obj.transcript.length > 100) {
+        return obj.transcript;
+      }
+      // Check description as fallback (Wistia sometimes swaps them)
+      if (obj.description && typeof obj.description === 'string' && obj.description.length > 200) {
+        return obj.description;
+      }
+    }
+    
+    // Recurse into @graph arrays
+    if (Array.isArray(obj['@graph'])) {
+      for (const item of obj['@graph']) {
+        const result = findTranscriptInObject(item, targetId);
+        if (result) return result;
+      }
+    }
+    
+    // Recurse into video objects
+    if (obj.video) {
+      const videos = Array.isArray(obj.video) ? obj.video : [obj.video];
+      for (const video of videos) {
+        const result = findTranscriptInObject(video, targetId);
+        if (result) return result;
+      }
+    }
+    
+    // Recurse into arrays
+    if (Array.isArray(obj)) {
+      for (const item of obj) {
+        const result = findTranscriptInObject(item, targetId);
+        if (result) return result;
+      }
+    }
+    
+    return null;
+  }
+
+  // Fetch VTT captions directly from Wistia's public caption server
+  async function fetchWistiaVTT(videoId) {
+    const vttUrl = `https://fast.wistia.com/embed/captions/${videoId}.vtt`;
+    
+    try {
+      const response = await fetch(vttUrl);
+      if (!response.ok) return null;
+      
+      const vttContent = await response.text();
+      
+      // Use existing VTT parser
+      const rawText = parseVTT(vttContent);
+      return rawText && rawText.length > 50 ? rawText : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Extract transcript from Shadow DOM elements
+  function extractFromShadowDOM(root) {
+    const lines = [];
+    
+    function walkShadow(node) {
+      if (!node) return;
+      
+      if (node.shadowRoot) {
+        walkShadow(node.shadowRoot);
+      }
+      
+      const selectors = [
+        '.w-transcript-line',
+        '.w-transcript-cue',
+        '.w-search-ui-results-wrapper',
+        '[class*="transcript-line"]',
+        '[class*="caption-cue"]'
+      ];
+      
+      for (const selector of selectors) {
+        const elements = node.querySelectorAll ? node.querySelectorAll(selector) : [];
+        for (const el of elements) {
+          const text = (el.innerText || el.textContent || '').trim();
+          if (text) lines.push(text);
+        }
+      }
+      
+      if (node.children) {
+        for (const child of node.children) {
+          walkShadow(child);
+        }
+      }
+    }
+    
+    walkShadow(root);
+    return lines;
+  }
+
+  function scrapeWistia() {
+    return new Promise(async (resolve) => {
+      sendStatus('Targeting active video transcript...');
+
+      // Step 1: Identify the active video in viewport
+      const activeVideoId = getActiveWistiaId();
+
+      // Step 2: Scan ALL JSON-LD blocks and match to active video
+      const jsonLdScripts = document.querySelectorAll('script[type="application/ld+json"]');
+      
+      for (const script of jsonLdScripts) {
+        try {
+          const data = JSON.parse(script.textContent);
+          const transcript = findTranscriptInObject(data, activeVideoId);
+          
+          if (transcript) {
+            if (transcript.length < 100) {
+              sendStatus('Transcript found but appears empty or restricted.');
+              continue;
+            }
+            const processed = processText(transcript);
+            if (processed) {
+              resolve({ transcript: processed });
+              return;
+            }
+          }
+        } catch (e) {
+          // JSON parse failed, continue to next script
+        }
+      }
+
+      // Step 3: Direct VTT fetch fallback if we have an ID
+      if (activeVideoId) {
+        sendStatus('Fetching captions from Wistia...');
+        const vttText = await fetchWistiaVTT(activeVideoId);
+        
+        if (vttText) {
+          if (vttText.length < 100) {
+            sendStatus('Transcript found but appears empty or restricted.');
+          } else {
+            const processed = processText(vttText);
+            if (processed) {
+              resolve({ transcript: processed });
+              return;
+            }
+          }
+        }
+      }
+
+      // Step 4: DOM fallback - Wistia transcript overlays
+      const transcriptSelectors = [
+        '.w-transcript-line',
+        '.w-transcript-cue',
+        '.w-search-ui-results-wrapper [class*="line"]',
+        '[class*="wistia"] [class*="transcript"]'
+      ];
+      
+      for (const selector of transcriptSelectors) {
+        const elements = document.querySelectorAll(selector);
+        if (elements.length > 0) {
+          const lines = [];
+          for (const el of elements) {
+            const text = (el.innerText || el.textContent || '').trim();
+            if (text) lines.push(text);
+          }
+          
+          if (lines.length > 0) {
+            const rawText = lines.join(' ');
+            if (rawText.length < 100) {
+              sendStatus('Transcript found but appears empty or restricted.');
+              continue;
+            }
+            const processed = processText(rawText);
+            if (processed) {
+              resolve({ transcript: processed });
+              return;
+            }
+          }
+        }
+      }
+
+      // Step 5: Shadow DOM fallback
+      const wistiaContainers = document.querySelectorAll(
+        '[class*="wistia"], .wistia_embed, .wistia_responsive_padding, [id*="wistia"]'
+      );
+      
+      for (const container of wistiaContainers) {
+        const shadowLines = extractFromShadowDOM(container);
+        
+        if (shadowLines.length > 0) {
+          const rawText = shadowLines.join(' ');
+          if (rawText.length < 100) {
+            sendStatus('Transcript found but appears empty or restricted.');
+            continue;
+          }
+          const processed = processText(rawText);
+          if (processed) {
+            resolve({ transcript: processed });
+            return;
+          }
+        }
+      }
+
+      // No transcript found
+      resolve({ error: 'No Wistia transcript found. Ensure the video has captions enabled.' });
+    });
+  }
+
+
   // === MAIN EXTRACTION ===
 
   function extract() {
@@ -406,6 +887,13 @@
       return observeYouTubeTranscript();
     } else if (hostname.includes('udemy.com')) {
       return scrapeUdemy();
+    } else if (hostname.includes('coursera.org')) {
+      return scrapeCoursera();
+    } else if (document.querySelector('iframe[src*="wistia"]') || 
+               document.querySelector('.wistia_embed') ||
+               document.querySelector('[class*="wistia_async_"]')) {
+      // Any page with Wistia video (Kajabi, Teachable, custom sites, etc.)
+      return scrapeWistia();
     } else {
       return scrapeGeneric();
     }

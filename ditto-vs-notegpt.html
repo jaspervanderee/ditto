@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compare Ditto vs NoteGPT: The privacy-first alternative to NoteGPT. 100% local processing, works on gated content like Udemy and Coursera, no account required. Free forever.">
+  <meta name="keywords" content="NoteGPT alternative, NoteGPT vs Ditto, private transcript generator, local transcript extractor, YouTube transcript privacy, transcript generator no account">
+  <meta name="author" content="Ditto">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://dittotranscriptgenerator.com/ditto-vs-notegpt.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="NoteGPT vs Ditto | The Best Privacy-First Transcript Generator">
+  <meta property="og:description" content="Why researchers are switching from NoteGPT to Ditto: 100% local processing, works on gated courses, no account required. Compare the privacy-first alternative.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dittotranscriptgenerator.com/ditto-vs-notegpt.html">
+  <meta property="og:image" content="https://dittotranscriptgenerator.com/images/ditto-transcript-generator-social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Ditto Transcript Generator">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NoteGPT vs Ditto | The Best Privacy-First Transcript Generator">
+  <meta name="twitter:description" content="Why researchers are switching from NoteGPT to Ditto: 100% local processing, works on gated courses, no account required.">
+  <meta name="twitter:image" content="https://dittotranscriptgenerator.com/images/ditto-transcript-generator-social.png">
+  
+  <link rel="icon" type="image/png" href="icons/icon32-bg.png">
+  <title>NoteGPT vs Ditto | The Best Privacy-First Transcript Generator</title>
+  
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="images/ditto-transcript-logo-yellow.svg" as="image" type="image/svg+xml">
+  <link rel="preload" href="landing.css" as="style">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+  
+  <!-- Page-Specific Styles -->
+  <style>
+    /* Comparison Page Hero Adjustments */
+    .hero-compare {
+      min-height: auto;
+      padding: 6rem 0 4rem;
+    }
+    
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      background: rgba(255, 255, 138, 0.1);
+      border: 1px solid rgba(255, 255, 138, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-seo-headline {
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    
+    .hero-visual-headline {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 500;
+      color: var(--white-dim);
+      max-width: 700px;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    
+    /* Data Stats Banner */
+    .data-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 3rem 0;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      border: 1px solid var(--white-faint);
+    }
+    
+    .stat-item {
+      text-align: center;
+      min-width: 120px;
+    }
+    
+    .stat-value {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--white-dim);
+    }
+    
+    /* Feature Comparison Grid (Ahrefs-style) */
+    .feature-grid {
+      padding: 5rem 0;
+      background: var(--dark-blue);
+    }
+    
+    .grid-table {
+      width: 100%;
+      max-width: 800px;
+      margin: 2rem auto 0;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--white-faint);
+    }
+    
+    .grid-table thead {
+      background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .grid-table th {
+      padding: 1.5rem 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      text-align: center;
+      border-bottom: 1px solid var(--white-faint);
+    }
+    
+    .grid-table th:first-child {
+      text-align: left;
+      padding-left: 1.5rem;
+    }
+    
+    .grid-table th.ditto-col {
+      background: rgba(255, 255, 138, 0.08);
+      color: var(--yellow);
+    }
+    
+    .grid-table td {
+      padding: 1.25rem 1rem;
+      font-size: 0.9375rem;
+      color: var(--white-dim);
+      text-align: center;
+      border-bottom: 1px solid var(--white-faint);
+      background: rgba(0, 0, 0, 0.2);
+    }
+    
+    .grid-table td:first-child {
+      text-align: left;
+      padding-left: 1.5rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+    
+    .grid-table td.ditto-col {
+      background: rgba(255, 255, 138, 0.05);
+    }
+    
+    .grid-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .grid-table tbody tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    .grid-table tbody tr:hover td.ditto-col {
+      background: rgba(255, 255, 138, 0.08);
+    }
+    
+    .cell-good {
+      color: #4ade80;
+      font-weight: 500;
+    }
+    
+    .cell-bad {
+      color: #f87171;
+      font-weight: 500;
+    }
+    
+    .cell-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .cell-icon img {
+      width: 18px;
+      height: 18px;
+    }
+    
+    /* Sovereign Pillars Section */
+    .sovereign-pillars {
+      padding: 5rem 0;
+      background: linear-gradient(180deg, var(--dark-blue) 0%, var(--black) 100%);
+    }
+    
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .pillar-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      padding: 2rem;
+      border-left: 4px solid var(--yellow);
+      transition: transform var(--transition-med), box-shadow var(--transition-med);
+    }
+    
+    .pillar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+    
+    .pillar-label {
+      display: inline-block;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 0.75rem;
+    }
+    
+    .pillar-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    
+    .pillar-desc {
+      font-size: 0.9375rem;
+      color: var(--white-dim);
+      line-height: 1.7;
+    }
+    
+    .pillar-highlight {
+      color: var(--yellow);
+      font-weight: 500;
+    }
+    
+    /* Migration CTA Section */
+    .migration-cta {
+      padding: 5rem 0;
+      background: var(--black);
+      text-align: center;
+    }
+    
+    .migration-box {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, rgba(255, 255, 138, 0.08) 0%, rgba(255, 255, 138, 0.02) 100%);
+      border: 1px solid rgba(255, 255, 138, 0.2);
+      border-radius: 24px;
+    }
+    
+    .migration-headline {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    
+    .migration-subline {
+      font-size: 1.0625rem;
+      color: var(--white-dim);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    
+    .migration-subline strong {
+      color: var(--yellow);
+    }
+    
+    /* Breadcrumb */
+    .breadcrumb {
+      position: absolute;
+      top: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--white-dim);
+      z-index: 10;
+    }
+    
+    .breadcrumb a {
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    
+    .breadcrumb a:hover {
+      color: var(--yellow);
+    }
+    
+    .breadcrumb-separator {
+      opacity: 0.5;
+    }
+    
+    .breadcrumb-current {
+      color: var(--yellow);
+    }
+    
+    /* Responsive Adjustments */
+    @media (min-width: 640px) {
+      .pillar-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .grid-table th,
+      .grid-table td {
+        padding: 1.5rem;
+      }
+      
+      .grid-table th:first-child,
+      .grid-table td:first-child {
+        padding-left: 2rem;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .hero-compare {
+        padding: 8rem 0 5rem;
+      }
+      
+      .data-stats {
+        gap: 4rem;
+      }
+    }
+  </style>
+  
+  <!-- SoftwareApplication Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Ditto — NoteGPT Alternative",
+    "description": "The privacy-first alternative to NoteGPT. 100% local transcript extraction, works on gated content platforms like Udemy, Coursera, and Kajabi. No account required, free forever.",
+    "applicationCategory": "BrowserExtension",
+    "operatingSystem": "Chrome, Edge, Brave",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Jasper van de Ree",
+      "url": "https://jaspervanderee.com"
+    },
+    "license": "https://opensource.org/licenses/MIT",
+    "url": "https://dittotranscriptgenerator.com/ditto-vs-notegpt.html",
+    "downloadUrl": "https://chrome.google.com/webstore",
+    "softwareVersion": "1.0",
+    "permissions": "activeTab, clipboardWrite",
+    "featureList": [
+      "100% local processing",
+      "No account required",
+      "Works on gated content",
+      "Open source MIT license",
+      "Unlimited free extractions"
+    ]
+  }
+  </script>
+  
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://dittotranscriptgenerator.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Ditto vs NoteGPT",
+        "item": "https://dittotranscriptgenerator.com/ditto-vs-notegpt.html"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best NoteGPT alternative for privacy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ditto is the leading privacy-first NoteGPT alternative. Unlike NoteGPT which processes transcripts on remote servers, Ditto extracts text 100% locally in your browser. Your data never leaves your machine."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Ditto work on platforms NoteGPT doesn't support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. NoteGPT is limited to public YouTube URLs, while Ditto works directly in your browser on gated content platforms like Udemy, Coursera, Teachable, and Kajabi—courses you've already purchased and are logged into."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Ditto really free with no limits?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Ditto is MIT-licensed open-source software with no usage limits, no freemium tiers, and no account required. NoteGPT uses a freemium model with usage caps on free accounts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why should I switch from NoteGPT to Ditto?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Switch to Ditto if you value privacy (local processing vs cloud), need access to gated courses (Udemy, Coursera), or want unlimited free extractions without creating an account. Ditto is the sovereign choice for professional researchers."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <!-- ComparisonPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "NoteGPT vs Ditto Comparison",
+    "description": "A detailed comparison between NoteGPT and Ditto transcript generators, focusing on privacy, platform support, and pricing.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Ditto",
+            "applicationCategory": "BrowserExtension",
+            "offers": { "@type": "Offer", "price": "0" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "NoteGPT",
+            "applicationCategory": "WebApplication",
+            "offers": { "@type": "Offer", "price": "0", "priceSpecification": { "@type": "PriceSpecification", "priceCurrency": "USD", "price": "0", "description": "Freemium with limits" } }
+          }
+        }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Scanline Overlay for Retrowave Effect -->
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Hero Section -->
+  <header class="hero hero-compare">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="grid-floor"></div>
+      <div class="sun"></div>
+    </div>
+    
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current">Ditto vs NoteGPT</span>
+    </nav>
+    
+    <div class="container hero-content">
+      <a href="index.html">
+        <img src="images/ditto-transcript-logo-yellow.svg" alt="Ditto - Privacy-First Transcript Generator" class="hero-logo">
+      </a>
+      
+      <!-- Eyebrow -->
+      <span class="hero-eyebrow">NoteGPT Alternative</span>
+      
+      <!-- H1 - Primary SEO Headline -->
+      <h1 class="hero-seo-headline">The Privacy-First Alternative to NoteGPT</h1>
+      
+      <!-- H2 - Supporting Value Proposition -->
+      <h2 class="hero-visual-headline">Why Professional Researchers Are Switching from NoteGPT to Ditto</h2>
+      
+      <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="cta-primary">
+        Switch to Ditto — It's Free
+      </a>
+      <span class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="badge-icon">
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+        </svg>
+        100% Local Processing • No Account Required
+      </span>
+      
+      <!-- Key Stats -->
+      <div class="data-stats">
+        <div class="stat-item">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Data sent to servers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">100+</div>
+          <div class="stat-label">Platforms supported</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Free extractions</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">MIT</div>
+          <div class="stat-label">Open source license</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sovereign Pillars Section -->
+  <section class="sovereign-pillars" id="why-switch">
+    <div class="container">
+      <h2 class="section-headline">The Sovereign Difference</h2>
+      <p class="section-subline">Three reasons researchers trust Ditto over NoteGPT</p>
+      
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <span class="pillar-label">Privacy</span>
+          <h3 class="pillar-title">Your Data Never Leaves Your Machine</h3>
+          <p class="pillar-desc">NoteGPT processes your video URLs and transcript data on remote cloud servers—you're trusting them with your research history. <span class="pillar-highlight">Ditto is 100% local.</span> The extraction happens entirely in your browser tab. We have zero access to your transcripts, your watch history, or what you're researching.</p>
+        </div>
+        
+        <div class="pillar-card">
+          <span class="pillar-label">Access</span>
+          <h3 class="pillar-title">Works Behind Login Walls</h3>
+          <p class="pillar-desc">NoteGPT only works with public YouTube URLs you paste into their web interface. <span class="pillar-highlight">Ditto works directly in your browser</span> on gated content platforms like Udemy, Coursera, Teachable, and Kajabi—courses you've already paid for and are logged into. Extract transcripts from content NoteGPT can't even see.</p>
+        </div>
+        
+        <div class="pillar-card">
+          <span class="pillar-label">Simplicity</span>
+          <h3 class="pillar-title">One Click. No Account. Free Forever.</h3>
+          <p class="pillar-desc">NoteGPT requires account creation, has usage limits on free tiers, and upsells premium features. <span class="pillar-highlight">Ditto is one-click extraction</span> with zero registration, zero usage caps, and zero paywalls. MIT-licensed open source—free forever, no strings attached.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Comparison Grid -->
+  <section class="feature-grid" id="comparison">
+    <div class="container">
+      <h2 class="section-headline">Feature-by-Feature Comparison</h2>
+      <p class="section-subline">See how Ditto stacks up against NoteGPT on the metrics that matter</p>
+      
+      <table class="grid-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="ditto-col">Ditto</th>
+            <th>NoteGPT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Data Processing</td>
+            <td class="ditto-col">
+              <span class="cell-icon cell-good">
+                <img src="images/checkmark.svg" alt="Yes">
+                100% Local
+              </span>
+            </td>
+            <td>
+              <span class="cell-icon cell-bad">
+                <img src="images/cross.svg" alt="No">
+                Cloud Servers
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Account Required</td>
+            <td class="ditto-col">
+              <span class="cell-icon cell-good">
+                <img src="images/checkmark.svg" alt="No account needed">
+                No
+              </span>
+            </td>
+            <td>
+              <span class="cell-icon cell-bad">
+                <img src="images/cross.svg" alt="Account required">
+                Yes
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Gated Content Support</td>
+            <td class="ditto-col">
+              <span class="cell-icon cell-good">
+                <img src="images/checkmark.svg" alt="Yes">
+                Udemy, Coursera, Kajabi +
+              </span>
+            </td>
+            <td>
+              <span class="cell-icon cell-bad">
+                <img src="images/cross.svg" alt="No">
+                YouTube Only
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Usage Limits</td>
+            <td class="ditto-col">
+              <span class="cell-icon cell-good">
+                <img src="images/checkmark.svg" alt="Unlimited">
+                Unlimited
+              </span>
+            </td>
+            <td>
+              <span class="cell-icon cell-bad">
+                <img src="images/cross.svg" alt="Limited">
+                Free tier caps
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Pricing Model</td>
+            <td class="ditto-col">
+              <span class="cell-icon cell-good">
+                <img src="images/checkmark.svg" alt="Free">
+                Free / MIT License
+              </span>
+            </td>
+            <td>
+              <span class="cell-icon cell-bad">
+                <img src="images/cross.svg" alt="Freemium">
+                Freemium
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Open Source</td>
+            <td class="ditto-col">
+              <span class="cell-icon cell-good">
+                <img src="images/checkmark.svg" alt="Yes">
+                Yes, on GitHub
+              </span>
+            </td>
+            <td>
+              <span class="cell-icon cell-bad">
+                <img src="images/cross.svg" alt="No">
+                Closed Source
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Works Offline</td>
+            <td class="ditto-col">
+              <span class="cell-icon cell-good">
+                <img src="images/checkmark.svg" alt="Yes">
+                Yes (after install)
+              </span>
+            </td>
+            <td>
+              <span class="cell-icon cell-bad">
+                <img src="images/cross.svg" alt="No">
+                Requires Internet
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="cta-primary cta-comparison">
+        Try Ditto Free — No Account Needed
+      </a>
+    </div>
+  </section>
+
+  <!-- Deep Comparison Section -->
+  <section class="comparison" id="detailed-comparison">
+    <div class="container">
+      <h2 class="section-headline">NoteGPT vs Ditto: The Full Picture</h2>
+      <div class="comparison-table">
+        <div class="comparison-col cloud">
+          <h3 class="col-header">
+            <img src="images/cloud.svg" alt="NoteGPT cloud-based" class="col-icon-img">
+            <span class="col-title">NoteGPT</span>
+          </h3>
+          <ul class="col-list">
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="Feature limitation" class="item-icon">
+              Sends your URLs to cloud servers
+            </li>
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="Feature limitation" class="item-icon">
+              Requires account registration
+            </li>
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="Feature limitation" class="item-icon">
+              Limited to YouTube content
+            </li>
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="Feature limitation" class="item-icon">
+              Free tier usage caps
+            </li>
+            <li class="col-item bad">
+              <img src="images/cross.svg" alt="Feature limitation" class="item-icon">
+              Closed source code
+            </li>
+          </ul>
+        </div>
+        
+        <div class="comparison-divider">
+          <div class="divider-line"></div>
+          <span class="divider-vs">vs</span>
+          <div class="divider-line"></div>
+        </div>
+        
+        <div class="comparison-col ditto">
+          <h3 class="col-header">
+            <img src="images/ditto-transcript-logo-yellow.svg" alt="Ditto privacy-first alternative" class="col-logo-img">
+          </h3>
+          <ul class="col-list">
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
+              100% local browser processing
+            </li>
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
+              No signup, no login, no account
+            </li>
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
+              Works on 100+ platforms
+            </li>
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
+              Unlimited free extractions
+            </li>
+            <li class="col-item good">
+              <img src="images/checkmark.svg" alt="Feature included" class="item-icon">
+              Open source on GitHub
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-headline">Frequently Asked Questions</h2>
+      <p class="section-subline">Common questions about switching from NoteGPT to Ditto</p>
+      
+      <div class="faq-grid">
+        <details class="faq-item">
+          <summary class="faq-question">What is the best NoteGPT alternative for privacy?</summary>
+          <div class="faq-answer">
+            <p>Ditto is the leading privacy-first <strong>NoteGPT alternative</strong>. Unlike NoteGPT which processes transcripts on remote servers, Ditto extracts text 100% locally in your browser. Your video URLs, transcripts, and research topics never leave your machine. The entire codebase is open source on GitHub for anyone to audit.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">Does Ditto work on platforms NoteGPT doesn't support?</summary>
+          <div class="faq-answer">
+            <p>Yes. NoteGPT is limited to public YouTube URLs you paste into their web interface. Ditto works directly in your browser on gated content platforms like <strong>Udemy, Coursera, Teachable, Kajabi</strong>, and Circle.so—courses you've already purchased and are logged into. Since Ditto runs locally, it extracts from any page you can access.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">Is Ditto really free with no limits?</summary>
+          <div class="faq-answer">
+            <p>Yes. Ditto is MIT-licensed open-source software with no usage limits, no freemium tiers, and no account required. NoteGPT uses a freemium model with usage caps on free accounts and premium upsells. Ditto has no monetization—it's a tool built for the sovereign web.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">Why should I switch from NoteGPT to Ditto?</summary>
+          <div class="faq-answer">
+            <p>Switch to Ditto if you value: <strong>Privacy</strong> (local processing vs cloud servers), <strong>Access</strong> (works on Udemy, Coursera, and gated courses), or <strong>Freedom</strong> (unlimited free use, no account). If you're a professional researcher, student, or creator who values data sovereignty, Ditto is the better choice.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">Can I use Ditto's transcripts with AI tools like ChatGPT?</summary>
+          <div class="faq-answer">
+            <p>Absolutely. Ditto copies clean, formatted text to your clipboard. Paste it directly into ChatGPT, Claude, or any AI assistant to summarize content, create study guides, generate flashcards, or ask questions about the material. Unlike NoteGPT, you choose which AI (if any) processes your text.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">How do I install Ditto?</summary>
+          <div class="faq-answer">
+            <p>Install Ditto from the Chrome Web Store in one click—no account needed. Pin it to your browser toolbar, navigate to any video with captions, and click the Ditto icon. The transcript is instantly copied to your clipboard. Works on Chrome, Edge, Brave, and other Chromium browsers.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">Is Ditto safe to use?</summary>
+          <div class="faq-answer">
+            <p>Ditto requests only two permissions: <strong>activeTab</strong> (to read the current page when you click) and <strong>clipboardWrite</strong> (to copy the transcript). No background data collection, no analytics, no tracking. The source code is public on GitHub—verify it yourself.</p>
+          </div>
+        </details>
+        
+        <details class="faq-item">
+          <summary class="faq-question">What's the catch? How is Ditto free?</summary>
+          <div class="faq-answer">
+            <p>No catch. Ditto is built by an independent developer for the sovereign web community. It's supported by optional Value-for-Value contributions via Lightning Network. The tool is fully functional without payment—V4V is purely optional appreciation, not required.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Migration CTA Section -->
+  <section class="migration-cta" id="switch">
+    <div class="container">
+      <div class="migration-box">
+        <h2 class="migration-headline">Ready to Take Control of Your Transcripts?</h2>
+        <p class="migration-subline">Tired of usage limits and cloud processing? Switch to the <strong>sovereign way</strong> to extract transcripts. No data tax. No paywalls. No account required.</p>
+        <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="cta-primary">
+          Switch to Ditto — Free Forever
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <!-- Creator Section -->
+      <div class="creator-section">
+        <img src="images/jasper-van-de-ree.webp" alt="Jasper van de Ree" class="creator-photo">
+        <p class="creator-text">Hey <span class="wave-emoji">👋</span> I'm <a href="https://www.jaspervanderee.com" target="_blank" rel="noopener" class="creator-link">Jasper</a>, building tools for the sovereign individual. Follow my work on <a href="https://njump.me/npub165w944kqt29hrt90l2ssc0rvmhf0u77dgezskknfnczr7r030v0s2g6kae" target="_blank" rel="noopener" class="creator-link">Nostr</a>.</p>
+      </div>
+      
+      <!-- Footer Grid -->
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 class="footer-col-title">How it works</h4>
+          <ul class="footer-col-list">
+            <li><a href="udemy-notes-extractor.html" class="footer-col-link">How to get transcripts from Udemy</a></li>
+            <li><a href="teachable-transcript-extractor.html" class="footer-col-link">How to extract transcripts from Teachable</a></li>
+            <li><a href="coursera-transcript-extractor.html" class="footer-col-link">How to extract transcripts from Coursera</a></li>
+            <li><a href="kajabi-transcript-extractor.html" class="footer-col-link">Extracting Wistia transcripts from Kajabi</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Compare</h4>
+          <ul class="footer-col-list">
+            <li><a href="ditto-vs-notegpt.html" class="footer-col-link">Ditto vs NoteGPT</a></li>
+            <li><a href="#" class="footer-col-link">Ditto vs YouTube-Transcript.io</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4 class="footer-col-title">Utility</h4>
+          <ul class="footer-col-list">
+            <li><a href="#" class="footer-col-link">For Notetakers</a></li>
+            <li><a href="#" class="footer-col-link">For Creators</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4 class="footer-col-title">Resources</h4>
+          <ul class="footer-col-list">
+            <li><a href="privacy.html" class="footer-col-link">Privacy Promise</a></li>
+            <li>
+              <a href="https://github.com/jaspervanderee/ditto" target="_blank" rel="noopener" class="footer-col-link footer-col-link-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="footer-col-icon">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                View Source
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4 class="footer-col-title">More</h4>
+          <ul class="footer-col-list">
+            <li><a href="index.html" class="footer-col-link">Ditto Home</a></li>
+            <li><a href="https://buoybitcoin.com/" target="_blank" rel="noopener" class="footer-col-link">Buoy Bitcoin</a></li>
+            <li><a href="https://www.breen.studio/" target="_blank" rel="noopener" class="footer-col-link">Studio Breen</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="footer-brand">
+          <img src="icons/icon48-dark.png" alt="Ditto transcript generator logo" class="footer-logo">
+          <span class="footer-tagline">NoteGPT Alternative. Privacy First.</span>
+        </div>
+        <p class="footer-copy"><span id="currentYear">2026</span> Ditto. MIT License. Your data belongs to you.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="landing.js"></script>
+</body>
+</html>
