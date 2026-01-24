@@ -1411,7 +1411,6 @@ body {
 
 .wave-emoji {
   display: inline-block;
-  filter: sepia(1) hue-rotate(5deg) saturate(3) brightness(1.1);
 }
 
 /* Footer Grid */

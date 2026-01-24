@@ -1,5 +1,31 @@
 /* === Teachable Landing Page Specific Styles === */
 
+/* Teachable-themed Ghost UI Animation */
+.teachable-theme .play-button {
+  width: 68px;
+  height: 48px;
+  background: transparent;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.teachable-theme .play-button img {
+  width: 48px;
+  height: auto;
+  object-fit: contain;
+}
+
+.teachable-theme .progress-played {
+  background: #e6ff32;
+}
+
+.teachable-theme .progress-scrubber {
+  background: #e6ff32;
+}
+
 /* Eyebrow/Span styling */
 .hero-eyebrow {
   display: inline-block;

@@ -1,0 +1,27 @@
+/* === Coursera Page Specific Styles === */
+
+/* Coursera-themed Ghost UI Animation */
+.coursera-theme .play-button {
+  width: 68px;
+  height: 48px;
+  background: transparent;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.coursera-theme .play-button img {
+  width: 48px;
+  height: auto;
+  object-fit: contain;
+}
+
+.coursera-theme .progress-played {
+  background: #00a4ff;
+}
+
+.coursera-theme .progress-scrubber {
+  background: #00a4ff;
+}

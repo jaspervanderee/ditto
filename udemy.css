@@ -1,5 +1,31 @@
 /* === Udemy Landing Page Specific Styles === */
 
+/* Udemy-themed Ghost UI Animation */
+.udemy-theme .play-button {
+  width: 68px;
+  height: 48px;
+  background: transparent;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.udemy-theme .play-button img {
+  width: 48px;
+  height: auto;
+  object-fit: contain;
+}
+
+.udemy-theme .progress-played {
+  background: #b643f9;
+}
+
+.udemy-theme .progress-scrubber {
+  background: #b643f9;
+}
+
 /* Eyebrow/Span styling */
 .hero-eyebrow {
   display: inline-block;

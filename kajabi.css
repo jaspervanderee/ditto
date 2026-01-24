@@ -1,0 +1,27 @@
+/* === Kajabi Page Specific Styles === */
+
+/* Kajabi-themed Ghost UI Animation */
+.kajabi-theme .play-button {
+  width: 68px;
+  height: 48px;
+  background: transparent;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.kajabi-theme .play-button img {
+  width: 48px;
+  height: auto;
+  object-fit: contain;
+}
+
+.kajabi-theme .progress-played {
+  background: #fff;
+}
+
+.kajabi-theme .progress-scrubber {
+  background: #fff;
+}

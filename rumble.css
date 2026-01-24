@@ -1,0 +1,27 @@
+/* === Rumble Page Specific Styles === */
+
+/* Rumble-themed Ghost UI Animation */
+.rumble-theme .play-button {
+  width: 68px;
+  height: 48px;
+  background: transparent;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.rumble-theme .play-button img {
+  width: 48px;
+  height: auto;
+  object-fit: contain;
+}
+
+.rumble-theme .progress-played {
+  background: #95fc65;
+}
+
+.rumble-theme .progress-scrubber {
+  background: #95fc65;
+}
