@@ -878,6 +878,84 @@
   }
 
 
+  // === RUMBLE SCRAPER (Direct VTT Track Extraction) ===
+
+  // Find caption track within video elements, prefer English
+  function findRumbleCaptionTrack() {
+    const videos = document.querySelectorAll('video');
+    
+    for (const video of videos) {
+      const tracks = video.querySelectorAll('track[kind="captions"], track[kind="subtitles"]');
+      
+      if (tracks.length === 0) continue;
+      
+      // Prefer English tracks
+      for (const track of tracks) {
+        const srclang = (track.getAttribute('srclang') || '').toLowerCase();
+        const label = (track.getAttribute('label') || '').toLowerCase();
+        
+        if (srclang === 'en' || srclang === 'en-us' || label.includes('english')) {
+          return track;
+        }
+      }
+      
+      // Fallback to first available track
+      return tracks[0];
+    }
+    
+    return null;
+  }
+
+  function scrapeRumble() {
+    return new Promise(async (resolve) => {
+      const track = findRumbleCaptionTrack();
+      
+      if (!track) {
+        resolve({ error: 'No Rumble subtitles found. Ensure the video has captions available.' });
+        return;
+      }
+      
+      const src = track.getAttribute('src');
+      
+      if (!src) {
+        resolve({ error: 'Rumble subtitle track found but no source URL available.' });
+        return;
+      }
+      
+      try {
+        // Resolve relative URLs
+        const vttUrl = new URL(src, window.location.origin).href;
+        
+        // Notify popup that we're fetching subtitles
+        sendStatus('Fetching Rumble Subtitles...');
+        
+        // Fetch the VTT file
+        const response = await fetch(vttUrl);
+        
+        if (!response.ok) {
+          resolve({ error: 'Failed to fetch Rumble subtitles. The file may be unavailable.' });
+          return;
+        }
+        
+        const vttContent = await response.text();
+        const rawText = parseVTT(vttContent);
+        
+        if (rawText && rawText.length > 50) {
+          const processed = processText(rawText);
+          if (processed) {
+            resolve({ transcript: processed });
+            return;
+          }
+        }
+        
+        resolve({ error: 'Rumble subtitles parsed but content appears empty.' });
+      } catch (err) {
+        resolve({ error: 'Error fetching Rumble subtitles. Please try again.' });
+      }
+    });
+  }
+
+
   // === MAIN EXTRACTION ===
 
   function extract() {
@@ -889,6 +967,8 @@
       return scrapeUdemy();
     } else if (hostname.includes('coursera.org')) {
       return scrapeCoursera();
+    } else if (hostname.includes('rumble.com')) {
+      return scrapeRumble();
     } else if (document.querySelector('iframe[src*="wistia"]') || 
                document.querySelector('.wistia_embed') ||
                document.querySelector('[class*="wistia_async_"]')) {

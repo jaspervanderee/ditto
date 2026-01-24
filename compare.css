@@ -1,0 +1,321 @@
+/* === Comparison Page Specific Styles === */
+
+/* Eyebrow/Span styling - matches platform pages */
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 138, 0.3);
+  border-radius: 50px;
+  background: rgba(255, 255, 138, 0.05);
+}
+
+/* SEO H1 - subtle/secondary styling */
+.hero-seo-headline {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 500;
+  color: var(--white-dim);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* Visual H2 - primary visual headline */
+.hero-visual-headline {
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--white);
+}
+
+/* Breadcrumb styling - matches platform pages */
+.breadcrumb {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--white-dim);
+  z-index: 10;
+}
+
+.breadcrumb a {
+  color: var(--white-dim);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+  color: var(--yellow);
+}
+
+.breadcrumb-separator {
+  opacity: 0.5;
+}
+
+.breadcrumb-current {
+  color: var(--yellow-dim);
+}
+
+@media (min-width: 640px) {
+  .breadcrumb {
+    top: 1.5rem;
+    right: 2rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .breadcrumb {
+    display: none;
+  }
+}
+
+/* Comparison Page Hero Adjustments */
+.hero-compare {
+  min-height: auto;
+  padding: 6rem 0 4rem;
+}
+
+/* Data Stats Banner */
+.data-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3rem 0;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  border: 1px solid var(--white-faint);
+}
+
+.stat-item {
+  text-align: center;
+  min-width: 120px;
+}
+
+.stat-value {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--yellow);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--white-dim);
+}
+
+/* Feature Comparison Grid (Ahrefs-style) */
+.feature-grid {
+  padding: 5rem 0;
+  background: var(--dark-blue);
+}
+
+.grid-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto 0;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--white-faint);
+}
+
+.grid-table thead {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.grid-table th {
+  padding: 1.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  text-align: center;
+  border-bottom: 1px solid var(--white-faint);
+}
+
+.grid-table th:first-child {
+  text-align: left;
+  padding-left: 1.5rem;
+}
+
+.grid-table th.ditto-col {
+  background: rgba(255, 255, 138, 0.08);
+  color: var(--yellow);
+}
+
+.grid-table td {
+  padding: 1.25rem 1rem;
+  font-size: 0.9375rem;
+  color: var(--white-dim);
+  text-align: center;
+  border-bottom: 1px solid var(--white-faint);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.grid-table td:first-child {
+  text-align: left;
+  padding-left: 1.5rem;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.grid-table td.ditto-col {
+  background: rgba(255, 255, 138, 0.05);
+}
+
+.grid-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.grid-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.grid-table tbody tr:hover td.ditto-col {
+  background: rgba(255, 255, 138, 0.08);
+}
+
+.cell-good {
+  color: #4ade80;
+  font-weight: 500;
+}
+
+.cell-bad {
+  color: #f87171;
+  font-weight: 500;
+}
+
+.cell-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cell-icon img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Sovereign Pillars Section */
+.sovereign-pillars {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, var(--dark-blue) 0%, var(--black) 100%);
+}
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.pillar-card {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  border-left: 4px solid var(--yellow);
+  transition: transform var(--transition-med), box-shadow var(--transition-med);
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.pillar-label {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 0.75rem;
+}
+
+.pillar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.pillar-desc {
+  font-size: 0.9375rem;
+  color: var(--white-dim);
+  line-height: 1.7;
+}
+
+.pillar-highlight {
+  color: var(--yellow);
+  font-weight: 500;
+}
+
+/* Migration CTA Section */
+.migration-cta {
+  padding: 5rem 0;
+  background: var(--black);
+  text-align: center;
+}
+
+.migration-box {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.migration-headline {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.migration-subline {
+  font-size: 1.0625rem;
+  color: var(--white-dim);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.migration-subline strong {
+  color: var(--yellow);
+}
+
+/* Responsive Adjustments */
+@media (min-width: 640px) {
+  .pillar-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-table th,
+  .grid-table td {
+    padding: 1.5rem;
+  }
+  
+  .grid-table th:first-child,
+  .grid-table td:first-child {
+    padding-left: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-compare {
+    padding: 8rem 0 5rem;
+  }
+  
+  .data-stats {
+    gap: 4rem;
+  }
+}
