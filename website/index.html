@@ -37,6 +37,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="landing.css">
+  <link rel="stylesheet" href="hub.css">
   
   <!-- FAQ Schema -->
   <script type="application/ld+json">
@@ -200,7 +201,7 @@
       
       <h1 class="hero-headline">Privacy-First YouTube Transcript Generator</h1>
       <h2 class="hero-tagline">Extract text from any video instantly—100% local, no login, and free forever.</h2>
-      <p class="hero-subline">Stop pasting URLs into cloud tools. Ditto is an open-source video transcript generator and tube ripper that runs in your browser. Convert YouTube to text instantly—and extract from other platforms with zero data tax.</p>
+      <p class="hero-subline">Stop pasting URLs into cloud tools. Ditto is an open-source video transcript generator and tube ripper that runs in your browser. Convert YouTube to clean, paragraph-formatted text instantly—no timestamps, no noise, and zero data tax.</p>
       
       <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="cta-primary">
         Add to Browser — It's Free
@@ -426,34 +427,89 @@
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section class="features" id="features">
+  <!-- Platform Support Section -->
+  <section class="features" id="platforms">
     <div class="container">
-      <h2 class="section-headline">Built for Course Platforms</h2>
+      <h2 class="section-headline">Works on All Major Platforms</h2>
+      <p class="section-subline">Extract transcripts from the platforms you already use—no extra subscriptions required.</p>
       
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon feature-icon-youtube">
-            <img src="images/youtube-transcript-generator-logo.svg" alt="YouTube to text converter tool icon" class="feature-icon-img">
-          </div>
-          <h3 class="feature-title">YouTube Transcript Extractor</h3>
-          <p class="feature-desc">Universal discovery for course platforms. Extract transcripts from YouTube, Circle, Teachable, Kajabi, and any site with embedded video players.</p>
+      <div class="platform-grid">
+        <!-- YouTube -->
+        <div class="platform-card">
+          <img src="images/youtube-transcript-generator-logo.svg" alt="YouTube transcript generator" class="platform-logo">
+          <h3 class="platform-title">YouTube</h3>
+          <p class="platform-desc">Extract transcripts from any YouTube video with captions. Works on educational content, tutorials, podcasts, and more.</p>
+          <a href="video-transcript-generator.html" class="view-guide-btn">
+            View Guide
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
         </div>
         
-        <div class="feature-card">
-          <div class="feature-icon feature-icon-udemy">
-            <img src="images/udemy-transcript-generator-logo.svg" alt="Udemy transcript generator tool icon" class="feature-icon-img">
-          </div>
-          <h3 class="feature-title">Tube Ripper</h3>
-          <p class="feature-desc">1-click clipboard ripping. No fumbling with settings—just click Ditto and the full transcript lands in your clipboard. Paste anywhere.</p>
+        <!-- Rumble -->
+        <div class="platform-card">
+          <img src="images/rumble-transcript-generator-logo.svg" alt="Rumble transcript generator" class="platform-logo">
+          <h3 class="platform-title">Rumble</h3>
+          <p class="platform-desc">Rip transcripts from Rumble videos with full caption support. Perfect for alternative media and uncensored content.</p>
+          <a href="rumble-transcript-generator.html" class="view-guide-btn">
+            View Guide
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
         </div>
         
-        <div class="feature-card">
-          <div class="feature-icon feature-icon-coursera">
-            <img src="images/coursera-transcript-generator-logo.svg" alt="Coursera transcript extractor tool icon" class="feature-icon-img">
-          </div>
-          <h3 class="feature-title">Video Text Extractor</h3>
-          <p class="feature-desc">Minimal permissions required. Only activeTab and clipboardWrite. No access to history, bookmarks, or browsing data. Audit the source yourself.</p>
+        <!-- Udemy -->
+        <div class="platform-card">
+          <img src="images/udemy-transcript-generator-logo.svg" alt="Udemy transcript extractor" class="platform-logo">
+          <h3 class="platform-title">Udemy</h3>
+          <p class="platform-desc">Extract transcripts from any Udemy course you've enrolled in. Works with Udemy Business and personal accounts alike.</p>
+          <a href="udemy-notes-extractor.html" class="view-guide-btn">
+            View Guide
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Coursera -->
+        <div class="platform-card">
+          <img src="images/coursera-transcript-generator-logo.svg" alt="Coursera transcript extractor" class="platform-logo">
+          <h3 class="platform-title">Coursera</h3>
+          <p class="platform-desc">Perfect for students taking Coursera specializations. Rip VTT tracks with 100% accuracy for academic citation.</p>
+          <a href="coursera-transcript-extractor.html" class="view-guide-btn">
+            View Guide
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Teachable -->
+        <div class="platform-card">
+          <img src="images/teachable-transcript-generator-logo.svg" alt="Teachable transcript extractor" class="platform-logo">
+          <h3 class="platform-title">Teachable</h3>
+          <p class="platform-desc">Extract transcripts from Teachable courses you've purchased. Works on gated content behind login walls.</p>
+          <a href="teachable-transcript-extractor.html" class="view-guide-btn">
+            View Guide
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Kajabi -->
+        <div class="platform-card">
+          <img src="images/kajabi-transcript-generator-logo.svg" alt="Kajabi transcript extractor" class="platform-logo">
+          <h3 class="platform-title">Kajabi</h3>
+          <p class="platform-desc">Rip Wistia-hosted transcripts from Kajabi courses. Access the knowledge from premium coaching programs.</p>
+          <a href="kajabi-transcript-extractor.html" class="view-guide-btn">
+            View Guide
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
@@ -487,26 +543,71 @@
     </div>
   </section>
 
+  <!-- Formatting Advantage Section -->
+  <section class="engine-section formatting-section" id="formatting">
+    <div class="container">
+      <h2 class="section-headline">The Formatting Advantage</h2>
+      <p class="section-subline">Most transcript tools dump a "Wall of Noise"—messy timecodes (00:15) and broken sentences that confuse AI and are impossible to read. Ditto intelligently strips timestamps and reconstructs paragraphs for instant readability.</p>
+      
+      <!-- Before/After Split View -->
+      <div class="split-view">
+        <div class="split-panel split-before">
+          <div class="split-content terminal-style">
+            <code>00:00:12 so today we're going to</code>
+            <code>00:00:14 talk about why privacy</code>
+            <code>00:00:17 matters and how you can</code>
+            <code>00:00:19 actually protect yourself</code>
+            <code>00:00:22 online so let's dive</code>
+            <code>00:00:24 right into it the first</code>
+            <code>00:00:27 thing you need to know is</code>
+          </div>
+        </div>
+        <div class="split-divider">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="split-arrow">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+        <div class="split-panel split-after">
+          <div class="split-content clean-style">
+            <p>Today we're going to talk about why privacy matters and how you can actually protect yourself online.</p>
+            <p>Let's dive right into it. The first thing you need to know is...</p>
+          </div>
+        </div>
+      </div>
+      
+      <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="cta-primary cta-comparison">
+        Add to Browser — It's Free
+      </a>
+    </div>
+  </section>
+
   <!-- Social Proof Section -->
   <section class="social-proof" id="trust">
     <div class="container">
-      <h2 class="section-headline">Trusted by the Sovereign Web.</h2>
+      <h2 class="section-headline">What the Community is Saying</h2>
       
       <div class="testimonials">
         <blockquote class="testimonial">
           <p class="quote-text">"The only transcript tool that actually respects my privacy. No accounts, no tracking, just works."</p>
-          <cite class="quote-author">— Nostr pleb</cite>
-        </blockquote>
-        
-        <blockquote class="testimonial">
-          <p class="quote-text">"Finally, a tube ripper that doesn't want my email. Client-side sovereignty matters."</p>
-          <cite class="quote-author">— Bitcoin maxi</cite>
+          <cite class="quote-author">— Verified Researcher</cite>
         </blockquote>
         
         <blockquote class="testimonial">
           <p class="quote-text">"Sub-second extraction. I've timed it. This thing is absurdly fast."</p>
-          <cite class="quote-author">— Course hoarder</cite>
+          <cite class="quote-author">— Education Professional</cite>
         </blockquote>
+        
+        <div class="testimonial review-collector">
+          <div class="review-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+            </svg>
+          </div>
+          <p class="review-text">Your Voice Matters. Join 100+ researchers using Ditto to own their data.</p>
+          <a href="https://github.com/jaspervanderee/ditto/issues" target="_blank" rel="noopener" class="review-btn">
+            Leave a Review
+          </a>
+        </div>
       </div>
       
       <div class="nostr-follow">

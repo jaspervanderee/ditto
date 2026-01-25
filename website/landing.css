@@ -1080,6 +1080,60 @@ body {
   font-style: normal;
 }
 
+/* Review Collector Card */
+.review-collector {
+  border: 2px dashed var(--yellow-dim);
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.review-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #0a0a1a;
+}
+
+.review-text {
+  font-size: 1rem;
+  color: var(--white-dim);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.review-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0a0a1a;
+  background: var(--yellow);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 138, 0.3);
+}
+
 .nostr-follow {
   margin-top: 3rem;
   text-align: center;
