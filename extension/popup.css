@@ -66,9 +66,9 @@ body {
 
 /* === Loading State === */
 .status.loading .icon-loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  color: light-dark(#9CA3AF, #6B7280); /* Grey that works in light/dark */
+  animation: spinner-rotate 1s linear infinite;
 }
 
 .status.loading .message {
@@ -78,44 +78,15 @@ body {
   animation: pulse-text 2s ease-in-out infinite;
 }
 
-/* Ditto Echo Dots - bouncing dots that "echo" each other */
-.ditto-loader {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
+/* Spinning circle - partial arc that rotates */
+.spinner-circle {
+  stroke-dasharray: 47; /* ~75% of circumference (2πr ≈ 63) */
+  stroke-dashoffset: 16; /* Creates the gap */
 }
 
-.ditto-loader .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: light-dark(#1d005d, #ffff78);
-  animation: ditto-bounce 1.4s ease-in-out infinite;
-}
-
-.ditto-loader .dot:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.ditto-loader .dot:nth-child(2) {
-  animation-delay: 0.16s;
-}
-
-.ditto-loader .dot:nth-child(3) {
-  animation-delay: 0.32s;
-}
-
-/* Bouncy "echo" effect - dots scale and fade like ripples */
-@keyframes ditto-bounce {
-  0%, 80%, 100% {
-    transform: scale(0.6);
-    opacity: 0.4;
-  }
-  40% {
-    transform: scale(1);
-    opacity: 1;
-  }
+@keyframes spinner-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes pulse-text {

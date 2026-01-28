@@ -314,9 +314,9 @@ Three variants for each size (16, 32, 48, 128):
 ## 8. Development Notes
 
 ### 8.1 Current Status
-- Website is nearly complete with all major pages built
+- Website is complete with all major pages built
 - Extension core functionality is complete
-- Extension not yet published to Chrome Web Store (download URL placeholder: `https://chrome.google.com/webstore`)
+- Extension published to Chrome Web Store (download URL: `https://chromewebstore.google.com/detail/ditto/dleoedkgocakdfeblljodfpgfkbgjkhm`)
 - Extension files are in `extension/` folder, website files in `website/` folder
 
 ### 8.2 Known Patterns

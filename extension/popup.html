@@ -9,13 +9,11 @@
 <body>
   <main class="popup">
     <div id="status" class="status loading">
-      <!-- Loading animation - Ditto echo dots -->
+      <!-- Loading animation - spinning circle -->
       <div class="icon icon-loading">
-        <div class="ditto-loader">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10" class="spinner-circle"/>
+        </svg>
       </div>
       <!-- Success checkmark -->
       <div class="icon icon-success">

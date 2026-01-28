@@ -99,10 +99,9 @@ body {
 .visual-guide {
   position: relative;
   width: 100%;
-  max-width: 420px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid var(--white-faint);
-  border-radius: 16px;
+  max-width: 500px;
+  background: #2a2a2a;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
@@ -117,9 +116,9 @@ body {
 .window-chrome {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  background: #2d2d2d;
-  padding: 0.625rem 0.875rem;
+  justify-content: space-between;
+  background: #3d3d3d;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -138,8 +137,10 @@ body {
 .light-yellow { background: #ffbd2e; }
 .light-green { background: #28c840; }
 
-.chrome-spacer {
-  flex: 1;
+.extension-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* === Puzzle Icon === */
@@ -162,68 +163,62 @@ body {
 /* === Video Player Mockup === */
 .video-player {
   background: #000;
-  padding: 1.5rem;
+  position: relative;
+  border-radius: 0 0 12px 12px;
 }
 
 .video-area {
-  background: #0a0a0a;
   aspect-ratio: 16 / 9;
-  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.75rem;
+  position: relative;
 }
 
 .play-button {
-  width: 48px;
+  width: 68px;
   height: 48px;
   background: #ff7b7b;
-  border-radius: 50%;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--white);
-  transition: background var(--transition-fast), transform var(--transition-fast);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.play-button svg {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  margin-left: 3px;
 }
 
 .play-button:hover {
   background: #ff9999;
-  transform: scale(1.05);
 }
 
-.play-button svg {
-  width: 24px;
-  height: 24px;
-  margin-left: 3px;
-}
-
+/* Progress Bar */
 .progress-bar {
   height: 4px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .progress-played {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 35%;
   height: 100%;
+  width: 42%;
   background: #ff7b7b;
-  border-radius: 2px;
 }
 
 .progress-scrubber {
-  position: absolute;
-  left: 35%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   width: 10px;
   height: 10px;
   background: #ff7b7b;
   border-radius: 50%;
+  margin-left: -5px;
 }
 
 /* === Extension Dropdown === */
@@ -337,10 +332,10 @@ body {
   z-index: 100;
   background: var(--yellow);
   clip-path: polygon(0 0, 0 100%, 70% 70%);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  top: 180px;
-  left: 80px;
+  top: 50%;
+  left: 20%;
   opacity: 0;
+  filter: drop-shadow(0 0 6px var(--yellow));
   animation: cursor-journey 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
@@ -349,38 +344,16 @@ body {
    ============================================ */
 
 @keyframes cursor-journey {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  8% {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-  28% {
-    opacity: 1;
-    transform: translate(300px, -158px);
-  }
-  32% {
-    opacity: 1;
-    transform: translate(300px, -158px);
-  }
-  55% {
-    opacity: 1;
-    transform: translate(305px, -115px);
-  }
-  60% {
-    opacity: 1;
-    transform: translate(305px, -115px);
-  }
-  82% {
-    opacity: 1;
-    transform: translate(305px, -115px);
-  }
-  92%, 100% {
-    opacity: 0;
-    transform: translate(305px, -115px);
-  }
+  0% { opacity: 0; top: 50%; left: 20%; }
+  8% { opacity: 1; top: 50%; left: 20%; }
+  /* Move to puzzle icon (top right) */
+  28% { opacity: 1; top: 8px; left: calc(100% - 35px); }
+  32% { opacity: 1; top: 8px; left: calc(100% - 35px); }
+  /* Move down to Ditto row in dropdown */
+  55% { opacity: 1; top: 70px; left: calc(100% - 60px); }
+  60% { opacity: 1; top: 70px; left: calc(100% - 60px); }
+  82% { opacity: 1; top: 70px; left: calc(100% - 60px); }
+  92%, 100% { opacity: 0; top: 70px; left: calc(100% - 60px); }
 }
 
 @keyframes puzzle-react {
@@ -509,7 +482,7 @@ body {
 
 .privacy-note a {
   color: var(--yellow);
-  text-decoration: none;
+  text-decoration: underline;
   transition: opacity var(--transition-fast);
 }
 
@@ -549,45 +522,5 @@ body {
   
   .extension-dropdown {
     width: 175px;
-  }
-  
-  .cursor {
-    top: 160px;
-    left: 60px;
-  }
-  
-  @keyframes cursor-journey {
-    0% {
-      opacity: 0;
-      transform: translate(0, 0);
-    }
-    8% {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
-    28% {
-      opacity: 1;
-      transform: translate(240px, -138px);
-    }
-    32% {
-      opacity: 1;
-      transform: translate(240px, -138px);
-    }
-    55% {
-      opacity: 1;
-      transform: translate(245px, -95px);
-    }
-    60% {
-      opacity: 1;
-      transform: translate(245px, -95px);
-    }
-    82% {
-      opacity: 1;
-      transform: translate(245px, -95px);
-    }
-    92%, 100% {
-      opacity: 0;
-      transform: translate(245px, -95px);
-    }
   }
 }
