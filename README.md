@@ -1,4 +1,7 @@
 # Ditto 📄⚡
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 **The privacy-first, 100% local transcript ripper.** Ditto is a Chrome Extension designed for those who value knowledge without the "data tax." It extracts transcripts from YouTube and major course platforms (Circle, Teachable, Kajabi) instantly, processing everything on your machine. No cloud, no AI hallucinations, no data harvesting.
 
@@ -63,3 +66,25 @@ Ditto is free to use and open-source. If this tool saves you time or helps your 
 ## ⚖️ License
 
 Distributed under the **MIT License**. See `LICENSE` for more information. Built with 🧡 for the sovereign web.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://base21.uk"><img src="https://avatars.githubusercontent.com/u/62441426?v=4?s=100" width="100px;" alt="RGGH"/><br /><sub><b>RGGH</b></sub></a><br /><a href="https://github.com/jaspervanderee/ditto/pulls?q=is%3Apr+reviewed-by%3ARGGH" title="Reviewed Pull Requests">👀</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
