@@ -1,4 +1,7 @@
 # Ditto 📄⚡
+🌐 [dittotranscriptgenerator.com](https://dittotranscriptgenerator.com) | ⚡ [Install from Chrome Web Store](https://chromewebstore.google.com/detail/ditto/dleoedkgocakdfeblljodfpgfkbgjkhm)
+
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
