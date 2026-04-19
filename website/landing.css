@@ -1069,17 +1069,36 @@ body {
   text-align: center;
 }
 
-.compatibility-logos {
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-}
 
 .logo-track {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
+  gap: 2.5rem;
+  animation: scroll-logos 25s linear infinite;
+  width: max-content;
+}
+
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.compatibility-logos {
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.compatibility-logos:hover .logo-track {
+  animation-play-state: paused;
 }
 
 .compat-logo {
@@ -1089,6 +1108,7 @@ body {
   filter: grayscale(100%);
   opacity: 0.5;
   transition: filter 0.3s ease, opacity 0.3s ease;
+  flex-shrink: 0;
 }
 
 .compat-logo:hover {
@@ -1119,49 +1139,9 @@ body {
   margin: 0 auto;
 }
 
-/* Hide duplicate logos on desktop */
+/* Duplicate logos always visible for seamless scroll loop */
 .compat-logo-dup {
-  display: none;
-}
-
-/* Mobile infinite scroll animation */
-@media (max-width: 639px) {
-  .compat-logo-dup {
-    display: flex;
-  }
-
-  .compatibility-logos {
-    position: relative;
-  }
-
-  .logo-track {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 3rem;
-    animation: scroll-logos 20s linear infinite;
-    width: max-content;
-  }
-
-  .logo-track::after {
-    content: '';
-    display: flex;
-    gap: 3rem;
-  }
-
-  @keyframes scroll-logos {
-    0% {
-      transform: translateX(0);
-    }
-
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .compatibility-logos:hover .logo-track {
-    animation-play-state: paused;
-  }
+  display: flex;
 }
 
 .feature-title {
