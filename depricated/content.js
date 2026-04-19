@@ -77,18 +77,8 @@
 
   // === YOUTUBE SCRAPER ===
 
-  // Click the "Show transcript" button to open the transcript/chapters panel
   function clickShowTranscript() {
-    // Method 1: Direct "Show transcript" button (description area or elsewhere)
-    const allButtons = document.querySelectorAll('button, ytd-button-renderer, tp-yt-paper-button');
-    for (const btn of allButtons) {
-      const text = btn.textContent.trim().toLowerCase();
-      if (text === 'show transcript') {
-        return deepClick(btn);
-      }
-    }
-
-    // Method 2: Button inside description transcript section (legacy layout)
+    // Method 1: Button in description panel
     const descriptionButtons = document.querySelectorAll('ytd-video-description-transcript-section-renderer ytd-button-renderer');
     for (const btn of descriptionButtons) {
       if (btn.textContent.toLowerCase().includes('transcript')) {
@@ -96,10 +86,34 @@
       }
     }
 
-    // Method 3: Any button containing 'transcript'
+    // Method 2: Expand description first if collapsed
+    const expandButton = document.querySelector('#expand, tp-yt-paper-button#expand');
+    if (expandButton && expandButton.offsetParent !== null) {
+      deepClick(expandButton);
+    }
+
+    // Method 3: "More actions" menu
+    const moreActionsBtn = document.querySelector('ytd-menu-renderer button[aria-label="More actions"], #button-shape button[aria-label="More actions"]');
+    if (moreActionsBtn) {
+      deepClick(moreActionsBtn);
+      
+      setTimeout(() => {
+        const menuItems = document.querySelectorAll('ytd-menu-service-item-renderer, tp-yt-paper-item');
+        for (const item of menuItems) {
+          if (item.textContent.toLowerCase().includes('transcript')) {
+            deepClick(item);
+            break;
+          }
+        }
+      }, 200);
+      return true;
+    }
+
+    // Method 4: Direct transcript button anywhere
+    const allButtons = document.querySelectorAll('button, ytd-button-renderer, tp-yt-paper-button');
     for (const btn of allButtons) {
-      const text = btn.textContent.trim().toLowerCase();
-      if (text.includes('transcript')) {
+      const text = btn.textContent.toLowerCase();
+      if (text.includes('show transcript') || text === 'transcript') {
         return deepClick(btn);
       }
     }
@@ -107,42 +121,12 @@
     return false;
   }
 
-  // After the panel opens, YouTube may show Chapters first.
-  // Click the "Transcript" chip/tab to switch to transcript view.
-  function clickTranscriptChip() {
-    const chips = document.querySelectorAll('chip-view-model button, chip-shape button, button[role="tab"]');
-    for (const chip of chips) {
-      const text = chip.textContent.trim();
-      const label = chip.getAttribute('aria-label') || '';
-      if (text === 'Transcript' || label === 'Transcript') {
-        chip.click();
-        return true;
-      }
-    }
-    return false;
-  }
-
-  // Extract transcript text from the page using new or legacy selectors
   function getYouTubeTranscript() {
-    // === New layout (2025+): transcript-segment-view-model elements ===
-    const newSegments = document.querySelectorAll('transcript-segment-view-model');
-    if (newSegments.length > 0) {
-      const lines = [];
-      for (const segment of newSegments) {
-        // Text lives in a span with class yt-core-attributed-string
-        const textEl = segment.querySelector('span.yt-core-attributed-string, span[role="text"]');
-        if (textEl) {
-          lines.push(textEl.textContent.trim());
-        }
-      }
-      return lines.length > 0 ? lines.join(' ') : null;
-    }
-
-    // === Legacy layout: ytd-transcript-segment-renderer inside engagement panel ===
     const panel = document.querySelector(
       'ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-searchable-transcript"], ' +
       'ytd-transcript-renderer'
     );
+    
     if (!panel) return null;
 
     const segments = panel.querySelectorAll('ytd-transcript-segment-renderer');
@@ -161,29 +145,18 @@
 
   function observeYouTubeTranscript() {
     return new Promise(resolve => {
-      // Check if transcript segments already exist on the page
+      // Check if transcript already exists
       const existing = getYouTubeTranscript();
       if (existing) {
         const processed = processText(existing);
         if (processed) return resolve({ transcript: processed });
       }
 
-      // Step 1: Click "Show transcript" to open the panel
+      // Trigger transcript panel
       clickShowTranscript();
 
-      let transcriptChipClicked = false;
-
-      // Set up observer to watch for transcript content appearing
+      // Set up observer
       const observer = new MutationObserver(() => {
-        // If the chip bar appears but segments haven't loaded, click the Transcript chip
-        if (!transcriptChipClicked) {
-          const hasChipBar = document.querySelector('chip-bar-view-model, chip-view-model');
-          if (hasChipBar) {
-            clickTranscriptChip();
-            transcriptChipClicked = true;
-          }
-        }
-
         const transcript = getYouTubeTranscript();
         if (transcript) {
           observer.disconnect();
@@ -194,15 +167,6 @@
       });
 
       observer.observe(document.body, { childList: true, subtree: true });
-
-      // Also try clicking the chip after a short delay in case the chip bar
-      // was already in the DOM before the observer started
-      setTimeout(() => {
-        if (!transcriptChipClicked) {
-          clickTranscriptChip();
-          transcriptChipClicked = true;
-        }
-      }, 500);
 
       // Fail-safe timeout
       const timeout = setTimeout(() => {
@@ -992,83 +956,6 @@
   }
 
 
-  // === VIMEO SCRAPER (Direct VTT Track Extraction) ===
-
-  // Find caption track within Vimeo video elements, prefer English
-  function findVimeoCaptionTrack() {
-    const videos = document.querySelectorAll('video');
-    
-    for (const video of videos) {
-      const tracks = video.querySelectorAll('track[kind="captions"], track[kind="subtitles"]');
-      
-      if (tracks.length === 0) continue;
-      
-      // Prefer English tracks
-      for (const track of tracks) {
-        const srclang = (track.getAttribute('srclang') || '').toLowerCase();
-        
-        if (srclang.startsWith('en')) {
-          return track;
-        }
-      }
-      
-      // Fallback to first available track
-      return tracks[0];
-    }
-    
-    return null;
-  }
-
-  function scrapeVimeo() {
-    return new Promise(async (resolve) => {
-      const track = findVimeoCaptionTrack();
-      
-      if (!track) {
-        resolve({ error: 'No Vimeo subtitles found. Ensure the video has captions available.' });
-        return;
-      }
-      
-      const src = track.getAttribute('src');
-      
-      if (!src) {
-        resolve({ error: 'Vimeo subtitle track found but no source URL available.' });
-        return;
-      }
-      
-      try {
-        // Resolve relative URLs
-        const vttUrl = new URL(src, window.location.origin).href;
-        
-        // Notify popup that we're fetching subtitles
-        sendStatus('Fetching Vimeo Subtitles...');
-        
-        // Fetch the VTT file
-        const response = await fetch(vttUrl);
-        
-        if (!response.ok) {
-          resolve({ error: 'Failed to fetch Vimeo subtitles. The file may be unavailable.' });
-          return;
-        }
-        
-        const vttContent = await response.text();
-        const rawText = parseVTT(vttContent);
-        
-        if (rawText && rawText.length > 50) {
-          const processed = processText(rawText);
-          if (processed) {
-            resolve({ transcript: processed });
-            return;
-          }
-        }
-        
-        resolve({ error: 'Vimeo subtitles parsed but content appears empty.' });
-      } catch (err) {
-        resolve({ error: 'Error fetching Vimeo subtitles. Please try again.' });
-      }
-    });
-  }
-
-
   // === MAIN EXTRACTION ===
 
   function extract() {
@@ -1082,8 +969,6 @@
       return scrapeCoursera();
     } else if (hostname.includes('rumble.com')) {
       return scrapeRumble();
-    } else if (hostname.includes('vimeo.com')) {
-      return scrapeVimeo();
     } else if (document.querySelector('iframe[src*="wistia"]') || 
                document.querySelector('.wistia_embed') ||
                document.querySelector('[class*="wistia_async_"]')) {
