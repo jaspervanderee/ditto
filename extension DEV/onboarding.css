@@ -1,0 +1,526 @@
+/* === Onboarding Styles === */
+/* Matching Landing Page Aesthetic */
+
+/* === Design Tokens === */
+:root {
+  --yellow: #ffff8a;
+  --yellow-dim: rgba(255, 255, 138, 0.6);
+  --dark-blue: #1b0159;
+  --dark-blue-light: #2a0a7a;
+  --black: #000000;
+  --white: #ffffff;
+  --white-dim: rgba(255, 255, 255, 0.7);
+  --white-faint: rgba(255, 255, 138, 0.12);
+  
+  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  
+  --transition-fast: 0.15s ease;
+  --transition-med: 0.25s ease;
+}
+
+/* === Reset === */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === Text Selection === */
+::selection {
+  background: var(--yellow);
+  color: var(--black);
+}
+
+::-moz-selection {
+  background: var(--yellow);
+  color: var(--black);
+}
+
+/* === Base === */
+body {
+  font-family: var(--font-main);
+  background: linear-gradient(180deg, #1a142b 0%, #1d005d 100%);
+  background-attachment: fixed;
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Fixed Logo === */
+.brand-logo-link {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 100;
+}
+
+.brand-logo {
+  height: 36px;
+  width: auto;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 138, 0.3));
+}
+
+/* === Layout === */
+.onboarding {
+  width: 100%;
+  max-width: 560px;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* === Hero Section === */
+.hero {
+  text-align: center;
+}
+
+.headline {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.subline {
+  font-size: 1.0625rem;
+  color: var(--white-dim);
+  line-height: 1.5;
+}
+
+/* === Visual Guide Container === */
+.visual-guide {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  background: #2a2a2a;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* === Ghost Browser Chrome === */
+.ghost-browser {
+  position: relative;
+  width: 100%;
+}
+
+/* Window Chrome Header */
+.window-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #3d3d3d;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.traffic-lights {
+  display: flex;
+  gap: 6px;
+}
+
+.light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.light-red { background: #ff5f57; }
+.light-yellow { background: #ffbd2e; }
+.light-green { background: #28c840; }
+
+.extension-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === Puzzle Icon === */
+.puzzle-icon {
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: puzzle-react 5s ease-in-out infinite;
+}
+
+.puzzle-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* === Video Player Mockup === */
+.video-player {
+  background: #000;
+  position: relative;
+  border-radius: 0 0 12px 12px;
+}
+
+.video-area {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.play-button {
+  width: 68px;
+  height: 48px;
+  background: #ff7b7b;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.play-button svg {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  margin-left: 3px;
+}
+
+.play-button:hover {
+  background: #ff9999;
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.progress-played {
+  height: 100%;
+  width: 42%;
+  background: #ff7b7b;
+}
+
+.progress-scrubber {
+  width: 10px;
+  height: 10px;
+  background: #ff7b7b;
+  border-radius: 50%;
+  margin-left: -5px;
+}
+
+/* === Extension Dropdown === */
+.extension-dropdown {
+  position: absolute;
+  top: 42px;
+  right: 8px;
+  width: 200px;
+  background: #2d2d2d;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 0.5rem 0;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  transform-origin: top right;
+  animation: dropdown-cycle 5s ease-in-out infinite;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.8125rem;
+  color: var(--white);
+}
+
+.dropdown-item.faded {
+  opacity: 0.4;
+}
+
+/* Ditto brand icon in dropdown */
+.ext-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* Other extension icons */
+.ext-icon-svg {
+  width: 20px;
+  height: 20px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ext-icon-svg svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ext-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+/* === Pin Icon === */
+.pin-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pin-react 5s ease-in-out infinite;
+}
+
+.pin-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pin-placeholder {
+  width: 16px;
+  height: 16px;
+  color: var(--white);
+  opacity: 0.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pin-placeholder svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ditto-item {
+  position: relative;
+}
+
+/* Highlight ring around Ditto item */
+.ditto-item::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 2px solid var(--yellow);
+  border-radius: 8px;
+  pointer-events: none;
+  animation: highlight-cycle 5s ease-in-out infinite;
+}
+
+/* === Animated Cursor === */
+.cursor {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 100;
+  background: var(--yellow);
+  clip-path: polygon(0 0, 0 100%, 70% 70%);
+  top: 50%;
+  left: 20%;
+  opacity: 0;
+  filter: drop-shadow(0 0 6px var(--yellow));
+  animation: cursor-journey 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+@keyframes cursor-journey {
+  0% { opacity: 0; top: 50%; left: 20%; }
+  8% { opacity: 1; top: 50%; left: 20%; }
+  /* Move to puzzle icon (top right) */
+  28% { opacity: 1; top: 8px; left: calc(100% - 35px); }
+  32% { opacity: 1; top: 8px; left: calc(100% - 35px); }
+  /* Move down to Ditto row in dropdown */
+  55% { opacity: 1; top: 70px; left: calc(100% - 60px); }
+  60% { opacity: 1; top: 70px; left: calc(100% - 60px); }
+  82% { opacity: 1; top: 70px; left: calc(100% - 60px); }
+  92%, 100% { opacity: 0; top: 70px; left: calc(100% - 60px); }
+}
+
+@keyframes puzzle-react {
+  0%, 27% {
+    transform: scale(1);
+    opacity: 0.7;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  28% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--yellow));
+  }
+  30% {
+    transform: scale(0.85);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px var(--yellow));
+  }
+  33% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 6px var(--yellow));
+  }
+  42%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+@keyframes dropdown-cycle {
+  0%, 31% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  38%, 84% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  92%, 100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+}
+
+@keyframes highlight-cycle {
+  0%, 42% {
+    opacity: 0;
+  }
+  50%, 84% {
+    opacity: 1;
+  }
+  92%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pin-react {
+  0%, 38% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  46% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  54% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 6px var(--yellow));
+  }
+  57% {
+    transform: scale(0.8);
+    opacity: 1;
+    filter: drop-shadow(0 0 10px var(--yellow));
+  }
+  62% {
+    transform: scale(1.15);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--yellow));
+  }
+  68%, 84% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  92%, 100% {
+    transform: scale(0);
+    opacity: 0;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+/* === CTA Button === */
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  background: var(--yellow);
+  color: var(--black);
+  border: none;
+  padding: 1rem 2rem;
+  font-family: var(--font-main);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.cta-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 255, 138, 0.35);
+}
+
+.cta-primary:active {
+  transform: translateY(-1px);
+}
+
+/* === Privacy Note === */
+.privacy-note {
+  font-size: 0.875rem;
+  color: var(--white-dim);
+}
+
+.privacy-note a {
+  color: var(--yellow);
+  text-decoration: underline;
+  transition: opacity var(--transition-fast);
+}
+
+.privacy-note a:hover {
+  opacity: 0.8;
+}
+
+/* === Responsive === */
+@media (min-width: 1024px) {
+  .brand-logo-link {
+    top: 1.5rem;
+    left: 2rem;
+  }
+  
+  .brand-logo {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .onboarding {
+    padding: 5rem 1.25rem 3rem;
+    gap: 1.75rem;
+  }
+  
+  .headline {
+    font-size: 1.625rem;
+  }
+  
+  .subline {
+    font-size: 1rem;
+  }
+  
+  .visual-guide {
+    max-width: 100%;
+  }
+  
+  .extension-dropdown {
+    width: 175px;
+  }
+}

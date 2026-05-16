@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transcript Extractor</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+    <!-- Normal single-video status UI -->
+    <div id="status" class="status loading">
+      <!-- Loading animation - spinning circle -->
+      <div class="icon icon-loading">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10" class="spinner-circle"/>
+        </svg>
+      </div>
+      <!-- Success checkmark -->
+      <div class="icon icon-success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" class="check-circle"/>
+          <path d="M8 12l3 3 5-6" class="check-mark"/>
+        </svg>
+      </div>
+      <!-- Error X -->
+      <div class="icon icon-error">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10" class="error-circle"/>
+          <path d="M15 9l-6 6M9 9l6 6" class="error-x"/>
+        </svg>
+      </div>
+      <span class="message">Working</span>
+    </div>
+
+    <!-- Channel extraction UI (hidden by default) -->
+    <div id="channel-ui" class="channel-ui" style="display: none;">
+      <!-- Phase 1: Input -->
+      <div id="channel-input" class="channel-phase">
+        <div class="channel-input-row">
+          <input type="number" id="video-count" class="channel-count-input" placeholder="Number of videos..." min="1">
+          <button id="btn-all" class="btn-all">All</button>
+        </div>
+        <button id="btn-start" class="btn-start">Start</button>
+      </div>
+
+      <!-- Phase 2: Collecting (scrolling the page) -->
+      <div id="channel-collecting" class="channel-phase" style="display: none;">
+        <div class="icon icon-loading" style="display: block;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10" class="spinner-circle"/>
+          </svg>
+        </div>
+        <span id="collecting-text" class="channel-status-text">Scanning videos...</span>
+      </div>
+
+      <!-- Phase 3: Confirm -->
+      <div id="channel-confirm" class="channel-phase" style="display: none;">
+        <p id="confirm-text" class="confirm-text"></p>
+        <div class="confirm-buttons">
+          <button id="btn-confirm" class="btn-start">Extract</button>
+          <button id="btn-cancel" class="btn-cancel">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Phase 4: Extracting progress -->
+      <div id="channel-progress" class="channel-phase" style="display: none;">
+        <div class="icon icon-loading" style="display: block;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10" class="spinner-circle"/>
+          </svg>
+        </div>
+        <span id="progress-text" class="channel-status-text"></span>
+        <span id="progress-title" class="progress-title"></span>
+        <span class="progress-note">Please don't close the tabs — Ditto is working</span>
+      </div>
+
+      <!-- Phase 5: Done -->
+      <div id="channel-done" class="channel-phase" style="display: none;">
+        <div class="icon icon-success" style="display: block;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" class="check-circle"/>
+            <path d="M8 12l3 3 5-6" class="check-mark"/>
+          </svg>
+        </div>
+        <span id="done-text" class="channel-status-text"></span>
+      </div>
+    </div>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

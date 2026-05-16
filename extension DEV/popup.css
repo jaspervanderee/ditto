@@ -1,0 +1,368 @@
+/* === System Color Scheme === */
+:root {
+  color-scheme: light dark;
+  
+  /* Brand Colors */
+  --color-primary: #ffff78;   /* Yellow */
+  --color-secondary: #1d005d; /* Dark blue */
+  --color-dark: #000000;      /* Black */
+  --color-success: #27C485;   /* A friendly, minty green */
+  --color-error: #FF5252;     /* Soft but clear red */
+  
+  /* Neutrals */
+  --color-text: light-dark(#1F2937, #F3F4F6);
+  --color-bg: light-dark(#FFFFFF, #111827);
+  --color-subtle: light-dark(#F3F4F6, #1F2937);
+}
+
+/* === Reset === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-width: 200px; /* Slight bump for breathing room */
+  -webkit-font-smoothing: antialiased; /* Crisp text */
+}
+
+/* === Popup === */
+.popup {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === Status Container === */
+.status {
+  display: flex;
+  flex-direction: column; /* Stack icon and text */
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  transition: all 0.3s ease;
+}
+
+/* === Icons === */
+.icon {
+  width: 32px; /* Larger, more confident icons */
+  height: 32px;
+  display: none;
+  position: relative;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible; /* Allow glows/strokes to bleed slightly */
+}
+
+/* === Loading State === */
+.status.loading .icon-loading {
+  display: block;
+  color: light-dark(#9CA3AF, #6B7280); /* Grey that works in light/dark */
+  animation: spinner-rotate 1s linear infinite;
+}
+
+.status.loading .message {
+  color: var(--color-text);
+  opacity: 0.8;
+  font-weight: 500;
+  animation: pulse-text 2s ease-in-out infinite;
+}
+
+/* Spinning circle - partial arc that rotates */
+.spinner-circle {
+  stroke-dasharray: 47; /* ~75% of circumference (2πr ≈ 63) */
+  stroke-dashoffset: 16; /* Creates the gap */
+}
+
+@keyframes spinner-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.5; }
+}
+
+/* === Success State (Friendly / Trustworthy) === */
+.status.success .icon-success {
+  display: block;
+  color: var(--color-success);
+  /* The "Pop" - bouncy and satisfying */
+  animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.status.success .message {
+  color: var(--color-text);
+  animation: fade-up 0.4s ease-out forwards;
+}
+
+.check-circle {
+  stroke-dasharray: 63;
+  stroke-dashoffset: 63;
+  animation: circle-draw 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.check-mark {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  /* Deliberate delay for "1-2" punch effect */
+  animation: check-draw 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Spring physics pop */
+@keyframes pop-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes circle-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* === Error State === */
+.status.error .icon-error {
+  display: block;
+  color: var(--color-error);
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.status.error .message {
+  color: var(--color-error);
+  font-size: 0.8125rem; /* Slightly smaller for long error text */
+  text-align: center;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
+  40%, 60% { transform: translate3d(3px, 0, 0); }
+}
+
+
+/* === Channel Extraction UI === */
+
+.channel-ui {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 240px;
+}
+
+.channel-phase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* Input row: number input + All button */
+.channel-input-row {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.channel-count-input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid light-dark(#D1D5DB, #374151);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.channel-count-input:focus {
+  border-color: light-dark(#9CA3AF, #6B7280);
+}
+
+.channel-count-input::placeholder {
+  color: light-dark(#9CA3AF, #6B7280);
+  font-weight: 400;
+}
+
+/* Hide number input spinners */
+.channel-count-input::-webkit-inner-spin-button,
+.channel-count-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btn-all {
+  padding: 0.5rem 0.875rem;
+  border: 1.5px solid light-dark(#D1D5DB, #374151);
+  border-radius: 8px;
+  background: var(--color-subtle);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-all:hover {
+  background: light-dark(#E5E7EB, #374151);
+  border-color: light-dark(#9CA3AF, #6B7280);
+}
+
+.btn-all:active {
+  transform: scale(0.97);
+}
+
+/* Start / Extract button */
+.btn-start {
+  width: 100%;
+  padding: 0.625rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-dark);
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-start {
+    background: var(--color-primary);
+    color: var(--color-dark);
+  }
+}
+
+.btn-start:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-start:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-start:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Cancel button */
+.btn-cancel {
+  width: 100%;
+  padding: 0.625rem;
+  border: 1.5px solid light-dark(#D1D5DB, #374151);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-cancel:hover {
+  background: var(--color-subtle);
+}
+
+/* Confirm section */
+.confirm-text {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.confirm-buttons .btn-start,
+.confirm-buttons .btn-cancel {
+  flex: 1;
+}
+
+/* Progress & done text */
+.channel-status-text {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.progress-title {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: light-dark(#6B7280, #9CA3AF);
+  text-align: center;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.progress-note {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: light-dark(#9CA3AF, #6B7280);
+  text-align: center;
+  font-style: italic;
+  margin-top: 0.25rem;
+  opacity: 0.8;
+}
+
+/* Spinner inside channel phases */
+.channel-phase .icon-loading {
+  color: light-dark(#9CA3AF, #6B7280);
+  animation: spinner-rotate 1s linear infinite;
+}
+
+.channel-phase .icon-success {
+  color: var(--color-success);
+  animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.channel-phase .icon-success .check-circle {
+  animation: circle-draw 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.channel-phase .icon-success .check-mark {
+  animation: check-draw 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+}
